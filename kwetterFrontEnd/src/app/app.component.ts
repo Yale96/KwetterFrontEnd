@@ -8,14 +8,21 @@ import {User} from './User';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   model = new User('', '');
+
 
   submitted = false;
 
-  onSubmit() { this.submitted = true; console.log("submittedd")}
+  onSubmit() { this.submitted = true; console.log(this.model); }
 
   newUser() {
     this.model = new User('', '');
     console.log('success');
 }
+
+onLogin() {
+      return '/startpagina';
+}
+
 }

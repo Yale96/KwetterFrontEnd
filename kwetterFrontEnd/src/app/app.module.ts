@@ -10,15 +10,15 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    StartpaginaComponent,
-    ProfileComponent,
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
+  ],
+  declarations: [
+    AppComponent,
+    StartpaginaComponent,
+    ProfileComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
