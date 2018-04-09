@@ -12,7 +12,7 @@ export class AppComponent {
 
   submitted = false;
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() { this.submitted = true; console.log("submittedd")}
 
   newUser() {
     this.model = new User('', '');
