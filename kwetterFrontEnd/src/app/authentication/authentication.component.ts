@@ -28,7 +28,7 @@ export class AuthenticationComponent {
   }
 
   ngOnInit(): void {
-    this.http.get('https://api.github.com/users/seeschweiler').subscribe(data => {
+    this.http.get('http://localhost:8080/Kwetter/resources/tweets').subscribe(data => {
       console.log(data);
     });
   }

@@ -1,25 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Tweet} from '../Tweet';
+import {ApiService} from '../ApiService';
 
 @Component({
   selector: 'app-startpagina',
   templateUrl: './startpagina.component.html',
-  styleUrls: ['./startpagina.component.css']
+  styleUrls: ['./startpagina.component.css'],
+  providers: [ApiService]
 })
 export class StartpaginaComponent implements OnInit {
 
-  constructor(private http: HttpClient){}
+  _postsArray: Tweet[];
 
-  tweet = new Tweet('');
-
-  ngOnInit() {
+  constructor(private apiSerivce: ApiService) {
   }
 
-  postTweet(){
-    var body = "Name=" + 'admin' + "content=" + 'Testman';
-    this.http.post("http://localhost:8080/Kwetter/resources/tweets/post", body).subscribe((data) => {});
-    };
+  getPosts(): void {
+    this.apiSerivce.getPosts()
+      .subscribe(
+        resultArray => this._postsArray = resultArray,
+        error => console.log("Error :: " + error)
+      )
+  }
 
-
+  ngOnInit(): void {
+    this.getPosts();
+  }
 }

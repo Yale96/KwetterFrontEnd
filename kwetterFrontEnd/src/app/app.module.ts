@@ -8,7 +8,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { StartpaginaComponent } from './startpagina/startpagina.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
-import { AuthenticationComponent } from './authentication/authentication.component'; // <-- NgModel lives here
+import { AuthenticationComponent } from './authentication/authentication.component';
+import {HttpModule} from '@angular/http'; // <-- NgModel lives here
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,

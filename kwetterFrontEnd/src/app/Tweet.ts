@@ -1,5 +1,7 @@
 export class Tweet {
   constructor(
-    public content: string
+    public id: number,
+    public content: string,
+    public timeStamp: string
   ){}
 }
