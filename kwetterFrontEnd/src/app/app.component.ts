@@ -1,6 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {Profile} from './Profile';
-import {User} from './User';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +6,5 @@ import {User} from './User';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  model = new User('', '');
-
-
-  submitted = false;
-
-  onSubmit() { this.submitted = true; console.log(this.model); }
-
-  newUser() {
-    this.model = new User('', '');
-    console.log('success');
-}
-
-onLogin() {
-      return '/startpagina';
-}
-
+  title = 'Kwetter JEA';
 }

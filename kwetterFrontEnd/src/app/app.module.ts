@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { StartpaginaComponent } from './startpagina/startpagina.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule } from '@angular/forms';
+import { AuthenticationComponent } from './authentication/authentication.component'; // <-- NgModel lives here
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
     AppComponent,
     StartpaginaComponent,
     ProfileComponent,
+    AuthenticationComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
