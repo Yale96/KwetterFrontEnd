@@ -1,7 +1,9 @@
 export class Profile {
-  name: string;
-  location: string;
-  web: string;
-  bio: string;
-  picture: string;
+  constructor(
+    public name: string,
+    public location: string,
+    public web: string,
+    public bio: string,
+    public picture: string
+  ){}
 }

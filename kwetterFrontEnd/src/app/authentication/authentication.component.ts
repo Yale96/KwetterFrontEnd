@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Profile} from '../Profile';
 import {User} from '../User';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-authentication',
@@ -8,6 +9,7 @@ import {User} from '../User';
   styleUrls: ['./authentication.component.html']
 })
 export class AuthenticationComponent {
+  constructor(private http: HttpClient){}
 
   model = new User('', '');
 
@@ -23,6 +25,12 @@ export class AuthenticationComponent {
 
   onLogin() {
     window.location.href = '/profile';
+  }
+
+  ngOnInit(): void {
+    this.http.get('https://api.github.com/users/seeschweiler').subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
