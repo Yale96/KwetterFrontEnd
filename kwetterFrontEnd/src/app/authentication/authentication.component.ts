@@ -24,7 +24,7 @@ export class AuthenticationComponent {
   }
 
   onLogin() {
-    window.location.href = '/profile';
+    window.location.href = '/startpagina';
   }
 
   ngOnInit(): void {

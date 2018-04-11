@@ -12,6 +12,10 @@ import {ApiService} from '../ApiService';
 export class StartpaginaComponent implements OnInit {
 
   _postsArray: Tweet[];
+  errorMessage: String;
+  content: String;
+  name: String;
+  tweet = new Tweet();
 
   constructor(private apiSerivce: ApiService) {
   }
@@ -26,5 +30,15 @@ export class StartpaginaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
+  }
+
+  addTweet(): void {
+    this.apiSerivce.addTweetWithObservable(this.tweet)
+      .subscribe( tweett => {
+          this.getPosts();
+          this.name = "Admin";
+          this.content = tweett.content;
+        },
+        error => this.errorMessage = <any>error);
   }
 }

@@ -55,7 +55,8 @@
             <button class="btn btn-default" type="button">Plaats</button>
           </div>
           <input type="text" class="form-control" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1">
-          <button type="button" class="btn btn-default" (click)="postTweet();">API CALL</button>
+          <input [(ngModel)]="tweet.content" />
+          <button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button>
         </div>
 
       </div>
@@ -67,14 +68,12 @@
           <table class="table">
             <thead class="thead-inverse">
             <tr>
-              <th class="text-center">Tweet ID</th>
               <th class="text-center">Content</th>
               <th class="text-center">Tijdstip</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let post of _postsArray">
-              <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 15px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
             </tr>
