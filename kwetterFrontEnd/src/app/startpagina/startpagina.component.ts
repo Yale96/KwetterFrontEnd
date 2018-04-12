@@ -37,6 +37,7 @@ export class StartpaginaComponent implements OnInit {
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
+          tweett.content = tweett.content.replace("#","%23")
           this.content = tweett.content;
         },
         error => this.errorMessage = <any>error);
