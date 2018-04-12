@@ -1,9 +1,8 @@
 export class User {
-  constructor(
-  public username: string,
-  public password: string,
-  public tweetCount: number,
-  public followersCount: number,
-  public leadersCount: number
-) { }
+  username: string;
+  password: string;
+  tweetsCount: number;
+  followersCount: number;
+  supersCount: number;
+  constructor() { }
 }

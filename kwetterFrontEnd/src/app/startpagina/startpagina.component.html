@@ -119,10 +119,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let post of _statisticssArray">
-              <td class="text-center" style="width: 15px;">{{post.tweetCount}}</td>
-              <td class="text-center" style="width: 200px;">{{post.followersCount}}</td>
-              <td class="text-center" style="width: 200px;">{{post.leadersCount}}</td>
+            <tr *ngFor="let user of _statisticssArray">
+              <td class="text-center" style="width: 15px;">{{user.tweetsCount}}</td>
+              <td class="text-center" style="width: 200px;">{{user.username}}</td>
+              <td class="text-center" style="width: 200px;">{{user.supersCount}}</td>
             </tr>
             </tbody>
           </table>

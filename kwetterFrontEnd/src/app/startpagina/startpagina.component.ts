@@ -50,6 +50,7 @@ export class StartpaginaComponent implements OnInit {
   ngOnInit(): void {
     this.getPosts();
     this.getMentions();
+    this.getStatistics();
   }
 
   addTweet(): void {
