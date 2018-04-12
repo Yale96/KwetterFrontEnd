@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Tweet} from '../Tweet';
+import {User} from '../User';
 import {ApiService} from '../ApiService';
 
 @Component({
@@ -12,6 +13,8 @@ import {ApiService} from '../ApiService';
 export class StartpaginaComponent implements OnInit {
 
   _postsArray: Tweet[];
+  _mentionsArray: Tweet[];
+  _statisticssArray: User[];
   errorMessage: String;
   content: String;
   name: String;
@@ -25,11 +28,28 @@ export class StartpaginaComponent implements OnInit {
       .subscribe(
         resultArray => this._postsArray = resultArray,
         error => console.log("Error :: " + error)
-      )
+      );
+  }
+
+  getMentions(): void {
+    this.apiSerivce.getMentions()
+      .subscribe(
+        resultArray => this._mentionsArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
+  }
+
+  getStatistics(): void {
+    this.apiSerivce.getStatistics()
+      .subscribe(
+        resultArray => this._statisticssArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
   }
 
   ngOnInit(): void {
     this.getPosts();
+    this.getMentions();
   }
 
   addTweet(): void {

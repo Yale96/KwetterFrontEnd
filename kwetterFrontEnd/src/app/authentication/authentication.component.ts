@@ -9,17 +9,12 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./authentication.component.html']
 })
 export class AuthenticationComponent {
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
-  model = new User('', '');
-
-
-  submitted = false;
-
-  onSubmit() { this.submitted = true; console.log(this.model); }
+  onSubmit() { }
 
   newUser() {
-    this.model = new User('', '');
+    // this.model = new User('', '');
     console.log('success');
   }
 

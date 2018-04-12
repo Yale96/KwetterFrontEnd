@@ -1,4 +1,6 @@
 export class Tweet {
   content: string;
-  constructor(){}
+  timeStamp: string;
+  owner: string;
+  constructor() {}
 }

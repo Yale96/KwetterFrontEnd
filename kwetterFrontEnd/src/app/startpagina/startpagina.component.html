@@ -52,11 +52,10 @@
         <h3>Tweet posten</h3>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <button class="btn btn-default" type="button">Plaats</button>
+            <button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button>
           </div>
-          <input type="text" class="form-control" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1">
-          <input [(ngModel)]="tweet.content" />
-          <button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button>
+          <input [(ngModel)]="tweet.content" class="form-control" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1">
+
         </div>
 
       </div>
@@ -70,12 +69,16 @@
             <tr>
               <th class="text-center">Content</th>
               <th class="text-center">Tijdstip</th>
+              <th class="text-center">Like</th>
+              <th class="text-center">Flag</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let post of _postsArray">
               <td class="text-center" style="width: 15px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
+              <td><button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button></td>
+              <td><button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button></td>
             </tr>
             </tbody>
           </table>
@@ -84,54 +87,46 @@
 
       <div class="tab-pane fade in" id="tab3">
         <h3>@Mentions</h3>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Tweet poster</th>
-            <th scope="col">Tweet inhoud</th>
-            <th scope="col">Tijdstip van posten</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Content</th>
+              <th class="text-center">Tijdstip</th>
+              <th class="text-center">Poster</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let post of _mentionsArray">
+              <td class="text-center" style="width: 15px;">{{post.content}}</td>
+              <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
+              <td class="text-center" style="width: 200px;">{{post.owner}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="tab-pane fade in" id="tab4">
         <h3>Overzicht van jouw statistieken</h3>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Aantal tweets</th>
-            <th scope="col">Aantal volgers</th>
-            <th scope="col">Aantal volgende gebruikers</th>
-            <th scope="col">Laatst geposte Tweet</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Otto</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Aantal tweets</th>
+              <th class="text-center">Aantal volgers</th>
+              <th class="text-center">Aantal volgende</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let post of _statisticssArray">
+              <td class="text-center" style="width: 15px;">{{post.tweetCount}}</td>
+              <td class="text-center" style="width: 200px;">{{post.followersCount}}</td>
+              <td class="text-center" style="width: 200px;">{{post.leadersCount}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="tab-pane fade in" id="tab5">

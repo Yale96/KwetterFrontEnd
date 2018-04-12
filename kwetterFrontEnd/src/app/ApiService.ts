@@ -3,13 +3,16 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 import {Tweet} from "./tweet";
+import {User} from './User';
 import { Headers, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class ApiService {
 
   private _postsURL = "http://localhost:8080/Kwetter/resources/tweets";
-  private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Admin&content=";
+  private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Yale96&content=";
+  private getMentionsUrl = "http://localhost:8080/Kwetter/resources/tweets/mentionname?name=Admin";
+  private getUser = "http://localhost:8080/Kwetter/resources/users/single?name=Admin";
 
   constructor(private http: Http) {
   }
@@ -19,6 +22,24 @@ export class ApiService {
       .get(this._postsURL)
       .map((response: Response) => {
         return <Tweet[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getMentions(): Observable<Tweet[]> {
+    return this.http
+      .get(this.getMentionsUrl)
+      .map((response: Response) => {
+        return <Tweet[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getStatistics(): Observable<User[]> {
+    return this.http
+      .get(this.getUser)
+      .map((response: Response) => {
+        return <User[]>response.json();
       })
       .catch(this.handleError);
   }
