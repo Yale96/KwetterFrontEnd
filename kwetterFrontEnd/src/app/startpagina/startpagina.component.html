@@ -2,6 +2,15 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $(".btn-pref .btn").click(function () {
+        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        // $(".tab").addClass("active"); // instead of this do the below
+        $(this).removeClass("btn-default").addClass("btn-primary");
+      });
+    });
+  </script>
 </head>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -54,8 +63,8 @@
           <div class="input-group-prepend">
             <button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button>
           </div>
-          <input [(ngModel)]="tweet.content" class="form-control" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1">
-
+          <textarea  [(ngModel)]="tweet.content" class="form-control" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="140"></textarea>
+          <span>{{140 - tweet.content.length}} left</span>
         </div>
 
       </div>
@@ -67,6 +76,7 @@
           <table class="table">
             <thead class="thead-inverse">
             <tr>
+              <th class="text-center">Id</th>
               <th class="text-center">Content</th>
               <th class="text-center">Tijdstip</th>
               <th class="text-center">Like</th>
@@ -75,10 +85,11 @@
             </thead>
             <tbody>
             <tr *ngFor="let post of _postsArray">
+              <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 15px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
-              <td><button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button></td>
-              <td><button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button></td>
+              <td><button type="button" class="btn btn-default" (click)="addLike(post.id);">Like</button></td>
+              <td><button type="button" class="btn btn-default" (click)="addFlag(post.id);">Flag</button></td>
             </tr>
             </tbody>
           </table>
@@ -155,12 +166,4 @@
   </div>
 </div>
 
-<script>
-  $(document).ready(function() {
-    $(".btn-pref .btn").click(function () {
-      $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-      // $(".tab").addClass("active"); // instead of this do the below
-      $(this).removeClass("btn-default").addClass("btn-primary");
-    });
-  });
-</script>
+

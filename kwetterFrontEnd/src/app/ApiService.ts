@@ -13,6 +13,8 @@ export class ApiService {
   private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Yale96&content=";
   private getMentionsUrl = "http://localhost:8080/Kwetter/resources/tweets/mentionname?name=Admin";
   private getUser = "http://localhost:8080/Kwetter/resources/users/single?name=Admin";
+  private flagTweet = "http://localhost:8080/Kwetter/resources/tweets/flag?name=Admin&tweetId=";
+  private likeTweet = "http://localhost:8080/Kwetter/resources/tweets/like?name=Admin&tweetId=";
 
   constructor(private http: Http) {
   }
@@ -46,6 +48,22 @@ export class ApiService {
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
+  }
+
+  addLikeWithObservable(tweet:Tweet): Observable<Tweet> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.likeTweet + tweet.id, tweet, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  addFlagWithObservable(tweet:Tweet): Observable<Tweet> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.flagTweet + tweet.id, tweet, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
 
   addTweetWithObservable(tweet:Tweet): Observable<Tweet> {

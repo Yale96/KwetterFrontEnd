@@ -19,6 +19,8 @@ export class StartpaginaComponent implements OnInit {
   content: String;
   name: String;
   tweet = new Tweet();
+  id: number;
+  idd: number;
 
   constructor(private apiSerivce: ApiService) {
   }
@@ -51,6 +53,28 @@ export class StartpaginaComponent implements OnInit {
     this.getPosts();
     this.getMentions();
     this.getStatistics();
+  }
+
+  addFlag(idd): void {
+    this.apiSerivce.addFlagWithObservable(this.tweet)
+      .subscribe( tweett => {
+          this.getPosts();
+          this.name = "Admin";
+          tweett.id = idd;
+          this.id = tweett.id;
+        },
+        error => this.errorMessage = <any>error);
+  }
+
+  addLike(idd): void {
+    this.apiSerivce.addLikeWithObservable(this.tweet)
+      .subscribe( tweett => {
+          this.getPosts();
+          this.name = "Admin";
+          tweett.id = idd;
+          this.id = tweett.id;
+        },
+        error => this.errorMessage = <any>error);
   }
 
   addTweet(): void {
