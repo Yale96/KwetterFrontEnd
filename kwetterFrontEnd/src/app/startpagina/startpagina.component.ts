@@ -61,18 +61,18 @@ export class StartpaginaComponent implements OnInit {
           this.getPosts();
           this.name = "Admin";
           tweett.id = idd;
+          console.log('HET GESELECTEERDE ID' + idd);
           this.id = tweett.id;
         },
         error => this.errorMessage = <any>error);
   }
 
-  addLike(idd): void {
+  addLike(): void {
     this.apiSerivce.addLikeWithObservable(this.tweet)
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
-          tweett.id = idd;
-          this.id = tweett.id;
+          this.id = 1;
         },
         error => this.errorMessage = <any>error);
   }
@@ -82,7 +82,7 @@ export class StartpaginaComponent implements OnInit {
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
-          tweett.content = tweett.content.replace("#","%23")
+          tweett.content = tweett.content.replace("#","%23");
           this.content = tweett.content;
         },
         error => this.errorMessage = <any>error);

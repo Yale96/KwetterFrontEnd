@@ -13,8 +13,8 @@ export class ApiService {
   private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Yale96&content=";
   private getMentionsUrl = "http://localhost:8080/Kwetter/resources/tweets/mentionname?name=Admin";
   private getUser = "http://localhost:8080/Kwetter/resources/users/single?name=Admin";
-  private flagTweet = "http://localhost:8080/Kwetter/resources/tweets/flag?name=Admin&tweetId=";
-  private likeTweet = "http://localhost:8080/Kwetter/resources/tweets/like?name=Admin&tweetId=";
+  private flagTweet = "http://localhost:8080/Kwetter/resources/tweets/flag?name=Admin&tweetId=1";
+  private likeTweet = "http://localhost:8080/Kwetter/resources/tweets/like?name=Admin&tweetId=1";
 
   constructor(private http: Http) {
   }

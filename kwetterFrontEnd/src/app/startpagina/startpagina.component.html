@@ -88,8 +88,8 @@
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 15px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
-              <td><button type="button" class="btn btn-default" (click)="addLike(post.id);">Like</button></td>
-              <td><button type="button" class="btn btn-default" (click)="addFlag(post.id);">Flag</button></td>
+              <td><button type="button" class="btn btn-default" (click)="addLike();">Like</button></td>
+              <td><button type="button" class="btn btn-default" (click)="addFlag(this.post.id);">Flag</button></td>
             </tr>
             </tbody>
           </table>
