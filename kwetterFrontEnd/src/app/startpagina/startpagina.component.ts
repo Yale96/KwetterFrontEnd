@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Tweet} from '../Tweet';
 import {User} from '../User';
 import {ApiService} from '../ApiService';
+import {text} from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-startpagina',
@@ -15,12 +16,13 @@ export class StartpaginaComponent implements OnInit {
   _postsArray: Tweet[];
   _mentionsArray: Tweet[];
   _statisticssArray: User[];
-  errorMessage: String;
-  content: String;
-  name: String;
+  errorMessage: string;
+  content: string;
+  name: string;
   tweet = new Tweet();
   id: number;
   idd: number;
+  tekst: string;
 
   constructor(private apiSerivce: ApiService) {
   }
@@ -67,12 +69,14 @@ export class StartpaginaComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  addLike(): void {
+  addLike(idd): void {
     this.apiSerivce.addLikeWithObservable(this.tweet)
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
-          this.id = 1;
+          tweett.id = idd;
+          console.log('HET GESELECTEERDE ID' + idd);
+          this.id = tweett.id;
         },
         error => this.errorMessage = <any>error);
   }
@@ -82,7 +86,9 @@ export class StartpaginaComponent implements OnInit {
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
-          tweett.content = tweett.content.replace("#","%23");
+          this.tekst = tweett.content.replace('t', 'T');
+          console.log(this.tekst);
+          tweett.content = this.tekst;
           this.content = tweett.content;
         },
         error => this.errorMessage = <any>error);

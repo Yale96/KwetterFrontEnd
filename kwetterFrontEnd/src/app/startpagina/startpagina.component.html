@@ -63,7 +63,7 @@
           <div class="input-group-prepend">
             <button type="button" class="btn btn-default" (click)="addTweet();">Post tweet</button>
           </div>
-          <textarea  [(ngModel)]="tweet.content" class="form-control" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="140"></textarea>
+          <textarea  [(ngModel)]="tweet.content" class="form-control" style="width: 500px;" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="140"></textarea>
           <span>{{140 - tweet.content.length}} left</span>
         </div>
 
@@ -84,11 +84,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let post of _postsArray">
+            <tr *ngFor="let post of _postsArray;">
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 15px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
-              <td><button type="button" class="btn btn-default" (click)="addLike();">Like</button></td>
+              <td><button type="button" class="btn btn-default" (click)="addLike(this.post.id);">Like</button></td>
               <td><button type="button" class="btn btn-default" (click)="addFlag(this.post.id);">Flag</button></td>
             </tr>
             </tbody>
@@ -108,7 +108,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let post of _mentionsArray">
+            <tr *ngFor="let post of _mentionsArray;">
               <td class="text-center" style="width: 15px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
               <td class="text-center" style="width: 200px;">{{post.owner}}</td>
@@ -132,8 +132,8 @@
             <tbody>
             <tr *ngFor="let user of _statisticssArray">
               <td class="text-center" style="width: 15px;">{{user.tweetsCount}}</td>
-              <td class="text-center" style="width: 200px;">{{user.username}}</td>
-              <td class="text-center" style="width: 200px;">{{user.supersCount}}</td>
+              <td class="text-center" style="width: 15px;">{{user.username}}</td>
+              <td class="text-center" style="width: 15px;">{{user.supersCount}}</td>
             </tr>
             </tbody>
           </table>

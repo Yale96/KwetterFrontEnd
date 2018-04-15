@@ -8,13 +8,15 @@ import {HttpClient} from '@angular/common/http';
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.html']
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit{
   constructor(private http: HttpClient) {}
+
+  user = new User();
 
   onSubmit() { }
 
   newUser() {
-    // this.model = new User('', '');
+    this.user = new User();
     console.log('success');
   }
 
@@ -22,10 +24,6 @@ export class AuthenticationComponent {
     window.location.href = '/startpagina';
   }
 
-  ngOnInit(): void {
-    this.http.get('http://localhost:8080/Kwetter/resources/tweets').subscribe(data => {
-      console.log(data);
-    });
+  ngOnInit() {
   }
-
 }

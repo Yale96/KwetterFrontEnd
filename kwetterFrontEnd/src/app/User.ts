@@ -1,8 +1,8 @@
 export class User {
   username: string;
   password: string;
-  tweetsCount: number;
-  followersCount: number;
-  supersCount: number;
+  tweetsCount: string;
+  followersCount: string;
+  supersCount: string;
   constructor() { }
 }

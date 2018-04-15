@@ -2,6 +2,15 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".btn-pref .btn").click(function () {
+        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        // $(".tab").addClass("active"); // instead of this do the below
+        $(this).removeClass("btn-default").addClass("btn-primary");
+      });
+    });
+  </script>
 </head>
 
 <div class="alles">
@@ -55,17 +64,17 @@
             <div class="col-xs-12 col-sm-6 col-md-6">
               <div class="well well-sm">
                 <div class="row">
-                  <div class="col-sm-6 col-md-4">
-                    <img src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/29513296_1186175838186308_7575881302090863203_n.jpg?_nc_cat=0&oh=bda2a498bfd0841fe6c2a58b9d976a7c&oe=5B74945A" alt="" class="img-rounded img-responsive" />
+                  <div class="col-sm-6 col-md-4" *ngFor="let post of profilearray;">
+                    <img src="{{post.picture}}" alt="" class="img-rounded img-responsive" />
                   </div>
-                  <div class="col-sm-6 col-md-8">
-                    <h4>Yannick van Leeuwen</h4>
-                    <small><cite title="Tilburg, Netherlands">Tilburg, Nederland <i class="glyphicon glyphicon-map-marker">
+                  <div class="col-sm-6 col-md-8" *ngFor="let post of profilearray;">
+                    <h4>{{post.name}}</h4>
+                    <small><cite title="Tilburg, Netherlands">{{post.location}}<i class="glyphicon glyphicon-map-marker">
                     </i></cite></small>
                     <p>
-                      <i class="glyphicon glyphicon-envelope"></i>yannick.vanleeuwen@fontys.nl
+                      <i class="glyphicon glyphicon-envelope"></i>s.student@fontys.nl
                       <br />
-                      <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.yannick.com</a>
+                      <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{post.web}}</a>
                       <br />
                       <i class="glyphicon glyphicon-gift"></i>September 28, 1996</p>
                   </div>
@@ -78,81 +87,17 @@
 
       <div class="tab-pane fade in" id="tab2">
         <h3>Overzicht van jouw tweets</h3>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Tweet nummer</th>
-            <th scope="col">Tweet inhoud</th>
-            <th scope="col">Tijdstip van posten</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="tab-pane fade in" id="tab3">
-        <h3>Overzicht van jouw statistieken</h3>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Aantal tweets</th>
-            <th scope="col">Aantal volgers</th>
-            <th scope="col">Aantal volgende gebruikers</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          </tbody>
-        </table>
 
       </div>
+
+      <div class="tab-pane fade in" id="tab3">
+        <h3>Overzicht van jouw statistieken</h3>
+
+      </div>
+
       <div class="tab-pane fade in" id="tab4">
         <h3>Overzicht van de gebruikers die jij volgt</h3>
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Naam</th>
-            <th scope="col">Aantal tweets</th>
-            <th scope="col">Aantal volgers</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-          </tr>
-          </tbody>
-        </table>
+
       </div>
 
       <div class="tab-pane fade in" id="tab5">
@@ -166,7 +111,7 @@
                 <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                 <h6>Upload a different photo...</h6>
 
-                <input type="file" class="form-control" id="photo">
+                <input [(ngModel)]="profile.picture" type="file" class="form-control" id="photo">
               </div>
             </div>
 
@@ -176,13 +121,13 @@
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Username:</label>
                   <div class="col-lg-5">
-                    <input class="form-control" type="text" value="Bishop" id="username">
+                    <input [(ngModel)]="profile.username" class="form-control" type="text" value="Bishop" id="username">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Web:</label>
                   <div class="col-lg-5">
-                    <input class="form-control" type="text" value="" id="web">
+                    <input [(ngModel)]="profile.web" class="form-control" type="text" value="" id="web">
                   </div>
                 </div>
                 <div class="form-group">
@@ -194,19 +139,20 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label">Locatie:</label>
                   <div class="col-md-5">
-                    <input class="form-control" type="text" value="janeuser" id="location">
+                    <input [(ngModel)]="profile.location" class="form-control" type="text" value="janeuser" id="location">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label">Biography:</label>
                   <div class="col-md-5">
-                    <input class="form-control" type="text" value="janeuser" id="biography">
+                    <textarea  [(ngModel)]="profile.bio" class="form-control" style="width: 340px;" placeholder="Vertel iets over jezelf..." aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="160"></textarea>
+                    <span>{{160 - profile.bio.length}} left</span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label"></label>
                   <div class="col-md-8">
-                    <input type="button" class="btn btn-primary" value="Save Changes">
+                    <button type="button" class="btn btn-default" (click)="boom();">Post changes</button>
                     <span></span>
                     <input type="reset" class="btn btn-default" value="Cancel">
                   </div>
@@ -216,18 +162,9 @@
           </div>
         </div>
         <hr>
-
       </div>
     </div>
   </div>
 </div>
 </div>
-<script>
-  $(document).ready(function() {
-    $(".btn-pref .btn").click(function () {
-      $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-      // $(".tab").addClass("active"); // instead of this do the below
-      $(this).removeClass("btn-default").addClass("btn-primary");
-    });
-  });
-</script>
+

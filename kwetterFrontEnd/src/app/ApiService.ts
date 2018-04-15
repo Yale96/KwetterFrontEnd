@@ -5,16 +5,24 @@ import "rxjs/Rx";
 import {Tweet} from "./tweet";
 import {User} from './User';
 import { Headers, RequestOptions } from '@angular/http';
+import {Profile} from './Profile';
 
 @Injectable()
 export class ApiService {
 
   private _postsURL = "http://localhost:8080/Kwetter/resources/tweets";
-  private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Yale96&content=";
+  private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Admin&content=";
   private getMentionsUrl = "http://localhost:8080/Kwetter/resources/tweets/mentionname?name=Admin";
   private getUser = "http://localhost:8080/Kwetter/resources/users/single?name=Admin";
   private flagTweet = "http://localhost:8080/Kwetter/resources/tweets/flag?name=Admin&tweetId=1";
   private likeTweet = "http://localhost:8080/Kwetter/resources/tweets/like?name=Admin&tweetId=1";
+  private editProfile = "http://localhost:8080/Kwetter/resources/profiles/edit";
+  private editPicture = "http://localhost:8080/Kwetter/resources/profiles/edit/picture?id=1&toEdit=";
+  private editUsername = "http://localhost:8080/Kwetter/resources/profiles/edit/name?id=1&toEdit=";
+  private editWeb = "http://localhost:8080/Kwetter/resources/profiles/edit/web?id=1&toEdit=";
+  private editLocatie = "http://localhost:8080/Kwetter/resources/profiles/locatie/picture?id=1&toEdit=";
+  private editBio = "http://localhost:8080/Kwetter/resources/profiles/edit/bio?id=1&toEdit=";
+  private getProfileByName = "http://localhost:8080/Kwetter/resources/users/getProfileByName?name=Admin";
 
   constructor(private http: Http) {
   }
@@ -24,6 +32,15 @@ export class ApiService {
       .get(this._postsURL)
       .map((response: Response) => {
         return <Tweet[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getProfile(): Observable<Profile[]> {
+    return this.http
+      .get(this.getProfileByName)
+      .map((response: Response) => {
+        return <Profile[]>response.json();
       })
       .catch(this.handleError);
   }
@@ -50,7 +67,7 @@ export class ApiService {
     return Observable.throw(error.statusText);
   }
 
-  addLikeWithObservable(tweet:Tweet): Observable<Tweet> {
+  addLikeWithObservable(tweet: Tweet): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.likeTweet + tweet.id, tweet, options)
@@ -58,7 +75,7 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
-  addFlagWithObservable(tweet:Tweet): Observable<Tweet> {
+  addFlagWithObservable(tweet: Tweet): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.flagTweet + tweet.id, tweet, options)
@@ -66,10 +83,58 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
-  addTweetWithObservable(tweet:Tweet): Observable<Tweet> {
+  addTweetWithObservable(tweet: Tweet): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.addURL + tweet.content, tweet, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  editProfileWithObservable(profile: Profile): Observable<Profile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.editProfile, profile, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  editProfilePictureWithObservable(profile: Profile): Observable<Profile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.editPicture + profile.picture, profile, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  editProfileNameWithObservable(profile: Profile): Observable<Profile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.editUsername + profile.name, profile, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  editProfileWebWithObservable(profile: Profile): Observable<Profile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.editWeb + profile.web, profile, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  editProfileLocatieWithObservable(profile: Profile): Observable<Profile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.editLocatie + profile.location, profile, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  editProfileBiographyWithObservable(profile: Profile): Observable<Profile> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.editBio + profile.bio, profile, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
