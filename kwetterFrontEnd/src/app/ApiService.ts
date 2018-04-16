@@ -54,11 +54,11 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getStatistics(): Observable<User[]> {
+  getStatistics(): Observable<User> {
     return this.http
       .get(this.getUser)
       .map((response: Response) => {
-        return <User[]>response.json();
+        return <User>response.json();
       })
       .catch(this.handleError);
   }

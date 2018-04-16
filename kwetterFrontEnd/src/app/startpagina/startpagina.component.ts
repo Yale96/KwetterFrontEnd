@@ -15,7 +15,7 @@ export class StartpaginaComponent implements OnInit {
 
   _postsArray: Tweet[];
   _mentionsArray: Tweet[];
-  _statisticssArray: User[];
+  _statisticssArray: User;
   errorMessage: string;
   content: string;
   name: string;

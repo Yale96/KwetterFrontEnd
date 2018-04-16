@@ -20,16 +20,15 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
+        <a class="navbar-brand">Kwetter</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
+        <li><a routerLink="/profile">Profiel</a></li>
+        <li class="active"><a routerLink="/startpagina">Startpagina</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -104,10 +103,10 @@
             <tbody>
             <tr *ngFor="let post of _postsArray;">
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
-              <td class="text-center" style="width: 15px;">{{post.content}}</td>
+              <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
-              <td><button type="button" class="btn btn-default" (click)="addLike(this.post.id);">Like</button></td>
-              <td><button type="button" class="btn btn-default" (click)="addFlag(this.post.id);">Flag</button></td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default"  (click)="addLike(post.id);">Like</button></td>
+              <td style="width: 15px;"><button type="button" class="btn btn-default"  (click)="addFlag(post.id);">Flag</button></td>
             </tr>
             </tbody>
           </table>
@@ -148,10 +147,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let user of _statisticssArray">
-              <td class="text-center" style="width: 15px;">{{user.tweetsCount}}</td>
-              <td class="text-center" style="width: 15px;">{{user.username}}</td>
-              <td class="text-center" style="width: 15px;">{{user.supersCount}}</td>
+            <tr>
+              <td class="text-center" style="width: 15px;">{{_statisticssArray.tweetsCount}}</td>
+              <td class="text-center" style="width: 15px;">{{_statisticssArray.followersCount}}</td>
+              <td class="text-center" style="width: 15px;">{{_statisticssArray.supersCount}}</td>
             </tr>
             </tbody>
           </table>
