@@ -36,11 +36,11 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getProfile(): Observable<Profile[]> {
+  getProfile(): Observable<Profile> {
     return this.http
       .get(this.getProfileByName)
       .map((response: Response) => {
-        return <Profile[]>response.json();
+        return <Profile>response.json();
       })
       .catch(this.handleError);
   }

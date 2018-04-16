@@ -19,14 +19,14 @@ export class ProfileComponent implements OnInit {
   web: string;
   location: string;
   bio: string;
-  profilearray: Profile[];
+  profilearray: Profile;
   constructor(private apiSerivce: ApiService) {}
 
   ngOnInit() {
-    this.getPosts();
+    this.getProfile();
   }
 
-  getPosts(): void {
+  getProfile(): void {
     this.apiSerivce.getProfile()
       .subscribe(
         resultArray => this.profilearray = resultArray,
