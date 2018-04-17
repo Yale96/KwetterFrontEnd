@@ -104,8 +104,8 @@
               <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
               <td class="text-center" style="width: 200px;">{{post.owner}}</td>
-              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default"  (click)="addLike(post.id);">Like</button></td>
-              <td style="width: 15px;"><button type="button" class="btn btn-default"  (click)="addFlag(post.id);">Flag</button></td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center"  (click)="addLike(post.id);">Like</button></td>
+              <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center"  (click)="addFlag(post.id);">Flag</button></td>
             </tr>
             </tbody>
           </table>
@@ -157,26 +157,47 @@
       </div>
 
       <div class="tab-pane fade in" id="tab5">
-        <h3>Trends</h3>
-        <table class="table">
-          <thead>
-          </thead>
-          <tr>
+        <h3>Trending toppics</h3>
+        <div class="row">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Tag</th>
+              <th class="text-center">Laad tweets</th>
+            </tr>
+            </thead>
             <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
+            <tr *ngFor="let tag of tagsArray;">
+              <td class="text-center" style="width: 15px;">{{tag.content}}</td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center"  (click)="addLike(tag.content);">Laadt</button></td>
             </tr>
             </tbody>
-        </table>
+          </table>
+        </div>
+
+        <h3>Zoek naar Matches</h3>
+        <div class="row">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="content" aria-describedby="basic-addon1" #name>
+          </div>
+          <button type="button" class="btn btn-default"  (click)="getByMatchs(name.value)">Zoek</button>
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Content</th>
+              <th class="text-center">Tijdstip</th>
+              <th class="text-center">Poster</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let post of _matchesArray;">
+              <td class="text-center" style="width: 15px;">{{post.content}}</td>
+              <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
+              <td class="text-center" style="width: 200px;">{{post.owner}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

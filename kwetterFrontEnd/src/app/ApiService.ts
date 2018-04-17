@@ -6,6 +6,7 @@ import {Tweet} from "./tweet";
 import {User} from './User';
 import { Headers, RequestOptions } from '@angular/http';
 import {Profile} from './Profile';
+import {HashTag} from './HashTag';
 
 @Injectable()
 export class ApiService {
@@ -27,6 +28,8 @@ export class ApiService {
   private getTweetByUserId = "http://localhost:8080/Kwetter/resources/tweets/userid?id=1";
   private removeTweet = "http://localhost:8080/Kwetter/resources/tweets/remove?id=";
   private getFollowings = "http://localhost:8080/Kwetter/resources/users/getfollowing?id=1";
+  private getByMatches = "http://localhost:8080/Kwetter/resources/tweets/bycontent?content=";
+  private getTags = "http://localhost:8080/Kwetter/resources/hashtags";
 
   constructor(private http: Http) {
   }
@@ -36,6 +39,24 @@ export class ApiService {
       .get(this.getRecentTweet)
       .map((response: Response) => {
         return <Tweet>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getTagss(): Observable<HashTag[]> {
+    return this.http
+      .get(this.getTags)
+      .map((response: Response) => {
+        return <HashTag[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getMatches(string: any): Observable<Tweet[]> {
+    return this.http
+      .get(this.getByMatches + string)
+      .map((response: Response) => {
+        return <Tweet[]>response.json();
       })
       .catch(this.handleError);
   }
@@ -57,6 +78,7 @@ export class ApiService {
       })
       .catch(this.handleError);
   }
+
 
   getPosts(): Observable<Tweet[]> {
     return this.http

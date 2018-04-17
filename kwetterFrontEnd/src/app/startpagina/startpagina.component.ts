@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Tweet} from '../Tweet';
 import {User} from '../User';
+import {HashTag} from '../HashTag';
 import {ApiService} from '../ApiService';
 import {text} from '@angular/core/src/render3/instructions';
 
@@ -15,6 +16,8 @@ export class StartpaginaComponent implements OnInit {
 
   _postsArray: Tweet[];
   _mentionsArray: Tweet[];
+  _matchesArray: Tweet[];
+  tagsArray: HashTag[];
   _statisticssArray: User;
   errorMessage: string;
   content: string;
@@ -43,6 +46,22 @@ export class StartpaginaComponent implements OnInit {
       );
   }
 
+  getTagss(): void {
+    this.apiSerivce.getTagss()
+      .subscribe(
+        resultArray => this.tagsArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
+  }
+
+  getByMatchs(string: any): void {
+    this.apiSerivce.getMatches(string)
+      .subscribe(
+        resultArray => this._matchesArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
+  }
+
   getStatistics(): void {
     this.apiSerivce.getStatistics()
       .subscribe(
@@ -55,6 +74,7 @@ export class StartpaginaComponent implements OnInit {
     this.getPosts();
     this.getMentions();
     this.getStatistics();
+    this.getTagss();
   }
 
   addFlag(idde: any): void {
