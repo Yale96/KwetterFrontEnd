@@ -15,10 +15,10 @@ export class ProfileComponent implements OnInit {
   profile = new Profile();
   _postsArray: Tweet[];
   stringsArray: string[];
-  pictur: string;
+  picture: string;
   namesArray: string[];
   errorMessage: string;
-  name: string;
+  namee: string;
   id: number;
   tweet = new Tweet();
   web: string;
@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
   remove(idd): void {
     this.apiSerivce.removeTweetWithObservable(this.tweet)
       .subscribe( tweett => {
-          this.name = "Admin";
+          this.namee = "Admin";
           tweett.id = idd;
           console.log('HET GESELECTEERDE ID' + idd);
           this.id = tweett.id;
@@ -78,51 +78,48 @@ export class ProfileComponent implements OnInit {
       );
   }
 
-  editProfilePicture(): void  {
-    this.apiSerivce.editProfilePictureWithObservable(this.profile)
+  editProfilePicture(string: any): void  {
+    this.apiSerivce.editProfilePictureWithObservable(string)
       .subscribe( profilee => {
-          profilee.picture = this.pictur;
+          profilee.picture = string;
+          this.picture = profilee.picture;
         },
         error => this.errorMessage = <any>error);
   }
 
-  editProfileName(): void  {
-    this.apiSerivce.editProfileNameWithObservable(this.profile)
+  editProfileName(string: any): void  {
+    this.apiSerivce.editProfileNameWithObservable(string)
       .subscribe( profilee => {
-          profilee.name = this.name;
+          profilee.name = string;
+          this.namee = profilee.name;
         },
         error => this.errorMessage = <any>error);
   }
 
-  editProfileWeb(): void  {
-    this.apiSerivce.editProfileWebWithObservable(this.profile)
+  editProfileWeb(string: any): void  {
+    this.apiSerivce.editProfileWebWithObservable(string)
       .subscribe( profilee => {
-          profilee.web = this.web;
+          profilee.web = string;
+          this.web = profilee.web;
         },
         error => this.errorMessage = <any>error);
   }
 
-  editProfileLocatie(): void  {
-    this.apiSerivce.editProfileLocatieWithObservable(this.profile)
+  editProfileLocatie(string: any): void  {
+    this.apiSerivce.editProfileLocatieWithObservable(string)
       .subscribe( profilee => {
-          profilee.location = this.location;
+          profilee.location = string + ', Netherlands';
+          this.location = profilee.location;
         },
         error => this.errorMessage = <any>error);
   }
 
-  editProfileBio(): void  {
-    this.apiSerivce.editProfileBiographyWithObservable(this.profile)
+  editProfileBio(string: any): void  {
+    this.apiSerivce.editProfileBiographyWithObservable(string)
       .subscribe( profilee => {
-          profilee.bio = this.bio;
+          profilee.bio = string;
+          this.bio = profilee.bio;
         },
         error => this.errorMessage = <any>error);
-  }
-
-  boom(): void {
-    this.editProfileBio();
-    this.editProfileLocatie();
-    this.editProfileName();
-    this.editProfileWeb();
-    this.editProfilePicture();
   }
 }

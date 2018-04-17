@@ -138,42 +138,42 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
-  editProfilePictureWithObservable(profile: Profile): Observable<Profile> {
+  editProfilePictureWithObservable(string: any): Observable<Profile> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.editPicture + profile.picture, profile, options)
+    return this.http.put(this.editPicture + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
-  editProfileNameWithObservable(profile: Profile): Observable<Profile> {
+  editProfileNameWithObservable(string: any): Observable<Profile> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.editUsername + profile.name, profile, options)
+    return this.http.put(this.editUsername + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
-  editProfileWebWithObservable(profile: Profile): Observable<Profile> {
+  editProfileWebWithObservable(string: any): Observable<Profile> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.editWeb + profile.web, profile, options)
+    return this.http.put(this.editWeb + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
-  editProfileLocatieWithObservable(profile: Profile): Observable<Profile> {
+  editProfileLocatieWithObservable(string: any): Observable<Profile> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.editLocatie + profile.location, profile, options)
+    return this.http.put(this.editLocatie + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
-  editProfileBiographyWithObservable(profile: Profile): Observable<Profile> {
+  editProfileBiographyWithObservable(string: any): Observable<Profile> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.editBio + profile.bio, profile, options)
+    return this.http.put(this.editBio + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

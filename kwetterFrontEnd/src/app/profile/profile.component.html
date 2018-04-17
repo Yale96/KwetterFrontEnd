@@ -160,7 +160,7 @@
                 <img src="{{profilearray.picture}}" class="avatar img-circle" alt="avatar">
                 <h6>Upload a different photo...</h6>
 
-                <input [(ngModel)]="profile.picture" type="file" class="form-control" id="photo">
+                <input type="file" class="form-control" id="photo" #pica>
               </div>
             </div>
 
@@ -170,33 +170,33 @@
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Name:</label>
                   <div class="col-lg-5">
-                    <input [(ngModel)]="profile.name" class="form-control" type="text" value="{{profilearray.name}}" id="username">
+                    <input class="form-control" type="text" value="{{profilearray.name}}" id="username" #nima>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Web:</label>
                   <div class="col-lg-5">
-                    <input [(ngModel)]="profile.web" class="form-control" type="text" value="{{profilearray.web}}" id="web">
+                    <input class="form-control" type="text" value="{{profilearray.web}}" id="web" #weba>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label">Locatie:</label>
                   <div class="col-md-5">
-                    <input [(ngModel)]="profile.location" class="form-control" type="text" value="{{profilearray.location}}" id="location">
+                    <input class="form-control" type="text" value="{{profilearray.location}}" id="location" #loca>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label">Biography:</label>
                   <div class="col-md-5">
-                    <textarea  [(ngModel)]="profile.bio" class="form-control" style="width: 340px;" placeholder="Vertel iets over jezelf..." aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="160"></textarea>
+                    <textarea class="form-control" style="width: 340px;" placeholder="Vertel iets over jezelf..." aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="160" #bioa></textarea>
                     <br />
-                    <span>{{160 - profile.bio.length}} left</span>
+                    <span>{{160 - profilearray.bio.length}} left</span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label"></label>
                   <div class="col-md-8">
-                    <button type="button" class="btn btn-default" (click)="boom();">Post changes</button>
+                    <button type="button" class="btn btn-default" (click)="editProfilePicture(pica.value); editProfileName(nima.value); editProfileWeb(weba.value); editProfileLocatie(loca.value); editProfileBio(bioa.value);">Post changes</button>
                     <span></span>
                     <input type="reset" class="btn btn-default" value="Cancel">
                   </div>
@@ -204,7 +204,6 @@
               </form>
             </div>
           </div>
-        </div>
         <hr>
       </div>
     </div>
