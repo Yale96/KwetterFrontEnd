@@ -23,8 +23,29 @@ export class ApiService {
   private editLocatie = "http://localhost:8080/Kwetter/resources/profiles/locatie/picture?id=1&toEdit=";
   private editBio = "http://localhost:8080/Kwetter/resources/profiles/edit/bio?id=1&toEdit=";
   private getProfileByName = "http://localhost:8080/Kwetter/resources/users/getProfileByName?name=Admin";
+  private getRecentTweet = "http://localhost:8080/Kwetter/resources/tweets/userid/recent?id=2";
+  private getTweetByUserId = "http://localhost:8080/Kwetter/resources/tweets/userid?id=1";
+  private removeTweet = "http://localhost:8080/Kwetter/resources/tweets/remove?id=";
 
   constructor(private http: Http) {
+  }
+
+  getRecent(): Observable<Tweet> {
+    return this.http
+      .get(this.getRecentTweet)
+      .map((response: Response) => {
+        return <Tweet>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getByUserId(): Observable<Tweet[]> {
+    return this.http
+      .get(this.getTweetByUserId)
+      .map((response: Response) => {
+        return <Tweet[]>response.json();
+      })
+      .catch(this.handleError);
   }
 
   getPosts(): Observable<Tweet[]> {
@@ -65,6 +86,14 @@ export class ApiService {
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
+  }
+
+  removeTweetWithObservable(tweet: Tweet): Observable<Tweet> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.removeTweet + tweet.id, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
   }
 
   addLikeWithObservable(tweet: Tweet): Observable<Tweet> {

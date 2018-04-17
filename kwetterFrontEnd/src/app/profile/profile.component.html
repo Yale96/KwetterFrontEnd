@@ -25,7 +25,6 @@
         <li ><a routerLink="/startpagina">Startpagina</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
@@ -91,6 +90,8 @@
                       <br />
                       <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">{{profilearray.web}}</a>
                       <br />
+                      <i class="glyphicon glyphicon-heart-empty"></i>{{profilearray.bio}}
+                      <br />
                       <i class="glyphicon glyphicon-gift"></i>September 28, 1996</p>
                   </div>
                 </div>
@@ -102,6 +103,26 @@
 
       <div class="tab-pane fade in" id="tab2">
         <h3>Overzicht van jouw tweets</h3>
+        <div class="row">
+          <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+              <th class="text-center">Id</th>
+              <th class="text-center">Content</th>
+              <th class="text-center">Tijdstip</th>
+              <th class="text-center">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let post of _postsArray;">
+              <td class="text-center" style="width: 15px;">{{post.id}}</td>
+              <td class="text-center" style="width: 200px;">{{post.content}}</td>
+              <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default"  (click)="remove(post.id);">Remove</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
 
       </div>
 
@@ -123,7 +144,7 @@
             <!-- left column -->
             <div class="col-md-3">
               <div class="text-center">
-                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                <img src="{{profilearray.picture}}" class="avatar img-circle" alt="avatar">
                 <h6>Upload a different photo...</h6>
 
                 <input [(ngModel)]="profile.picture" type="file" class="form-control" id="photo">
@@ -134,33 +155,28 @@
             <div class="col-md-9 personal-info">
               <form class="form-horizontal" role="form">
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Username:</label>
+                  <label class="col-lg-3 control-label">Name:</label>
                   <div class="col-lg-5">
-                    <input [(ngModel)]="profile.username" class="form-control" type="text" value="Bishop" id="username">
+                    <input [(ngModel)]="profile.name" class="form-control" type="text" value="{{profilearray.name}}" id="username">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Web:</label>
                   <div class="col-lg-5">
-                    <input [(ngModel)]="profile.web" class="form-control" type="text" value="" id="web">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Email:</label>
-                  <div class="col-lg-5">
-                    <input class="form-control" type="text" value="janesemail@gmail.com" id="email">
+                    <input [(ngModel)]="profile.web" class="form-control" type="text" value="{{profilearray.web}}" id="web">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label">Locatie:</label>
                   <div class="col-md-5">
-                    <input [(ngModel)]="profile.location" class="form-control" type="text" value="janeuser" id="location">
+                    <input [(ngModel)]="profile.location" class="form-control" type="text" value="{{profilearray.location}}" id="location">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label">Biography:</label>
                   <div class="col-md-5">
                     <textarea  [(ngModel)]="profile.bio" class="form-control" style="width: 340px;" placeholder="Vertel iets over jezelf..." aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="160"></textarea>
+                    <br />
                     <span>{{160 - profile.bio.length}} left</span>
                   </div>
                 </div>

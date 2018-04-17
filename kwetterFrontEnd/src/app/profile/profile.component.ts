@@ -13,23 +13,56 @@ import {ApiService} from '../ApiService';
 export class ProfileComponent implements OnInit {
 
   profile = new Profile();
+  _postsArray: Tweet[];
   pictur: string;
   errorMessage: string;
   name: string;
+  id: number;
+  tweet = new Tweet();
   web: string;
   location: string;
   bio: string;
   profilearray: Profile;
+  tweetArray: Tweet;
   constructor(private apiSerivce: ApiService) {}
 
   ngOnInit() {
     this.getProfile();
+    this.getRecenteTweet();
+    this.getTweetsByUserId();
   }
 
   getProfile(): void {
     this.apiSerivce.getProfile()
       .subscribe(
         resultArray => this.profilearray = resultArray,
+        error => console.log("Error :: " + error)
+      );
+  }
+
+  getRecenteTweet(): void {
+    this.apiSerivce.getRecent()
+      .subscribe(
+        resultArray => this.tweetArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
+  }
+
+  remove(idd): void {
+    this.apiSerivce.removeTweetWithObservable(this.tweet)
+      .subscribe( tweett => {
+          this.name = "Admin";
+          tweett.id = idd;
+          console.log('HET GESELECTEERDE ID' + idd);
+          this.id = tweett.id;
+        },
+        error => this.errorMessage = <any>error);
+  }
+
+  getTweetsByUserId(): void {
+    this.apiSerivce.getByUserId()
+      .subscribe(
+        resultArray => this._postsArray = resultArray,
         error => console.log("Error :: " + error)
       );
   }
