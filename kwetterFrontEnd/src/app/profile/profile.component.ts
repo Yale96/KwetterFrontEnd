@@ -14,7 +14,9 @@ export class ProfileComponent implements OnInit {
 
   profile = new Profile();
   _postsArray: Tweet[];
+  stringsArray: string[];
   pictur: string;
+  namesArray: string[];
   errorMessage: string;
   name: string;
   id: number;
@@ -30,6 +32,7 @@ export class ProfileComponent implements OnInit {
     this.getProfile();
     this.getRecenteTweet();
     this.getTweetsByUserId();
+    this.getFollowingUsers();
   }
 
   getProfile(): void {
@@ -57,6 +60,14 @@ export class ProfileComponent implements OnInit {
           this.id = tweett.id;
         },
         error => this.errorMessage = <any>error);
+  }
+
+  getFollowingUsers(): void {
+    this.apiSerivce.getFollowing()
+      .subscribe(
+        resultArray => this.stringsArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
   }
 
   getTweetsByUserId(): void {

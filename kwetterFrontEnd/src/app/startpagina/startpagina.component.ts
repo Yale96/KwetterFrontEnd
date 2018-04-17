@@ -57,26 +57,26 @@ export class StartpaginaComponent implements OnInit {
     this.getStatistics();
   }
 
-  addFlag(idd): void {
-    this.apiSerivce.addFlagWithObservable(this.tweet)
+  addFlag(idde: any): void {
+    this.apiSerivce.addFlagWithObservable(idde)
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
-          tweett.id = idd;
-          console.log('HET GESELECTEERDE ID' + idd);
+          tweett.id = idde;
+          console.log('HET GESELECTEERDE ID' + idde);
           this.id = tweett.id;
         },
         error => this.errorMessage = <any>error);
   }
 
-  addLike(idd): void {
-    this.apiSerivce.addLikeWithObservable(this.tweet)
+  addLike(idde: any): void {
+    this.apiSerivce.addLikeWithObservable(idde)
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
-          tweett.id = idd;
-          console.log('HET GESELECTEERDE ID' + idd);
-          this.id = tweett.id;
+          tweett.id = idde;
+          console.log('HET GESELECTEERDE ID' + idde);
+          this.id = idde;
         },
         error => this.errorMessage = <any>error);
   }

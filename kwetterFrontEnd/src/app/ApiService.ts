@@ -14,8 +14,8 @@ export class ApiService {
   private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Admin&content=";
   private getMentionsUrl = "http://localhost:8080/Kwetter/resources/tweets/mentionname?name=Admin";
   private getUser = "http://localhost:8080/Kwetter/resources/users/single?name=Admin";
-  private flagTweet = "http://localhost:8080/Kwetter/resources/tweets/flag?name=Admin&tweetId=1";
-  private likeTweet = "http://localhost:8080/Kwetter/resources/tweets/like?name=Admin&tweetId=1";
+  private flagTweet = "http://localhost:8080/Kwetter/resources/tweets/flag?name=Admin&tweetId=";
+  private likeTweet = "http://localhost:8080/Kwetter/resources/tweets/like?name=Admin&tweetId=";
   private editProfile = "http://localhost:8080/Kwetter/resources/profiles/edit";
   private editPicture = "http://localhost:8080/Kwetter/resources/profiles/edit/picture?id=1&toEdit=";
   private editUsername = "http://localhost:8080/Kwetter/resources/profiles/edit/name?id=1&toEdit=";
@@ -26,6 +26,7 @@ export class ApiService {
   private getRecentTweet = "http://localhost:8080/Kwetter/resources/tweets/userid/recent?id=2";
   private getTweetByUserId = "http://localhost:8080/Kwetter/resources/tweets/userid?id=1";
   private removeTweet = "http://localhost:8080/Kwetter/resources/tweets/remove?id=";
+  private getFollowings = "http://localhost:8080/Kwetter/resources/users/getfollowing?id=1";
 
   constructor(private http: Http) {
   }
@@ -35,6 +36,15 @@ export class ApiService {
       .get(this.getRecentTweet)
       .map((response: Response) => {
         return <Tweet>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getFollowing(): Observable<string[]> {
+    return this.http
+      .get(this.getFollowings)
+      .map((response: Response) => {
+        return <string[]>response.json();
       })
       .catch(this.handleError);
   }
@@ -96,18 +106,18 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
-  addLikeWithObservable(tweet: Tweet): Observable<Tweet> {
+  addLikeWithObservable(id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.likeTweet, tweet, options)
+    return this.http.post(this.likeTweet + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
 
-  addFlagWithObservable(tweet: Tweet): Observable<Tweet> {
+  addFlagWithObservable(id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.flagTweet, tweet, options)
+    return this.http.post(this.flagTweet + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
