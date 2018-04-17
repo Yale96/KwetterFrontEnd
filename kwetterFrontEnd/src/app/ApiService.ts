@@ -99,7 +99,7 @@ export class ApiService {
   addLikeWithObservable(tweet: Tweet): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.likeTweet + tweet.id, tweet, options)
+    return this.http.post(this.likeTweet, tweet, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -107,7 +107,7 @@ export class ApiService {
   addFlagWithObservable(tweet: Tweet): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.flagTweet + tweet.id, tweet, options)
+    return this.http.post(this.flagTweet, tweet, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
