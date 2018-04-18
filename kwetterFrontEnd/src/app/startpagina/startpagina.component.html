@@ -2,12 +2,21 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>
-    $(document).ready(function() {
-      $(".btn-pref .btn").click(function () {
-        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-        // $(".tab").addClass("active"); // instead of this do the below
-        $(this).removeClass("btn-default").addClass("btn-primary");
+  <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+  <script>
+    function myFunction() {
+      document.getElementById("followButton").disabled = true;
+    }
+  </script>
+
+  <script type='text/javascript'>
+    $(function () {
+      $('#searchInput').onkeyup(function () {
+        if ($(this).val() == '') {
+          $('.enableOnInput').prop('disabled', true);
+        } else {
+          $('.enableOnInput').prop('disabled', false);
+        }
       });
     });
   </script>
@@ -27,7 +36,7 @@
         <li class="active"><a routerLink="/startpagina">Startpagina</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-out" (click)="logout()"></span> Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -96,6 +105,7 @@
               <th class="text-center">Owner</th>
               <th class="text-center">Like</th>
               <th class="text-center">Flag</th>
+              <th class="text-center">Follow</th>
             </tr>
             </thead>
             <tbody>
@@ -106,6 +116,7 @@
               <td class="text-center" style="width: 200px;">{{post.owner}}</td>
               <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center"  (click)="addLike(post.id);">Like</button></td>
               <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center"  (click)="addFlag(post.id);">Flag</button></td>
+              <td style="width: 15px;"><button type="button" id="followButton" class="btn btn-default center-block text-center" onclick="myFunction()" (click)="followUser(post.owner);">Follow</button></td>
             </tr>
             </tbody>
           </table>

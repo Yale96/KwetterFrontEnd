@@ -4,5 +4,7 @@ export class User {
   tweetsCount: number;
   followersCount: number;
   supersCount: number;
+  profileDTO: number;
+  roleDTO: number;
   constructor() { }
 }

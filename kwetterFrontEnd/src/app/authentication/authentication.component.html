@@ -29,7 +29,7 @@
                       <!-- Username -->
                       <label class="control-label"  for="username">Username</label>
                       <div class="controls">
-                        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                        <input type="text" id="username" name="username" placeholder="" class="input-xlarge" #usernamee>
                       </div>
                     </div>
 
@@ -37,14 +37,14 @@
                       <!-- Password-->
                       <label class="control-label" for="password">Password</label>
                       <div class="controls">
-                        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                        <input type="password" id="password" name="password" placeholder="" class="input-xlarge" #passwordd>
                       </div>
                     </div>
 
                     <div class="control-group">
                       <!-- Button -->
                       <div class="controls">
-                        <button type="button" class="btn btn-default" (click)="onLogin();">Login</button>
+                        <button type="button" class="btn btn-default" (click)="login(usernamee.value, passwordd.value)">Login</button>
                         <button type="button" class="btn btn-default" (click)="ngOnInit();">API CALL</button>
                       </div>
                     </div>

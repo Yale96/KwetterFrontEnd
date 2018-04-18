@@ -28,6 +28,7 @@ export class ApiService {
   private getTweetByUserId = "http://localhost:8080/Kwetter/resources/tweets/userid?id=1";
   private removeTweet = "http://localhost:8080/Kwetter/resources/tweets/remove?id=";
   private getFollowings = "http://localhost:8080/Kwetter/resources/users/getfollowing?id=1";
+  private followUser = "http://localhost:8080/Kwetter/resources/users/addFollower?id=2&superName=";
   private getByMatches = "http://localhost:8080/Kwetter/resources/tweets/bycontent?content=";
   private getTags = "http://localhost:8080/Kwetter/resources/hashtags";
 
@@ -132,6 +133,14 @@ export class ApiService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.likeTweet + id, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  followUserWithObservable(string: any): Observable<Tweet> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.followUser + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

@@ -5,12 +5,13 @@ import {User} from '../User';
 import {HashTag} from '../HashTag';
 import {ApiService} from '../ApiService';
 import {text} from '@angular/core/src/render3/instructions';
+import {AuthService} from '../AuthService';
 
 @Component({
   selector: 'app-startpagina',
   templateUrl: './startpagina.component.html',
   styleUrls: ['./startpagina.component.css'],
-  providers: [ApiService]
+  providers: [ApiService, AuthService]
 })
 export class StartpaginaComponent implements OnInit {
 
@@ -22,12 +23,17 @@ export class StartpaginaComponent implements OnInit {
   errorMessage: string;
   content: string;
   name: string;
+  user = new User();
   tweet = new Tweet();
   id: number;
-  idd: number;
-  tekst: string;
 
-  constructor(private apiSerivce: ApiService) {
+  constructor(private apiSerivce: ApiService, private authService: AuthService) {
+  }
+
+  logout()
+  {
+    this.authService.logout();
+    window.location.href = '/login';
   }
 
   getPosts(): void {
@@ -89,6 +95,14 @@ export class StartpaginaComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  followUser(string: any): void {
+    this.apiSerivce.followUserWithObservable(string)
+      .subscribe( user => {
+          this.getPosts();
+        },
+        error => this.errorMessage = <any>error);
+  }
+
   addLike(idde: any): void {
     this.apiSerivce.addLikeWithObservable(idde)
       .subscribe( tweett => {
@@ -105,11 +119,6 @@ export class StartpaginaComponent implements OnInit {
     this.apiSerivce.addTweetWithObservable(this.tweet)
       .subscribe( tweett => {
           this.getPosts();
-          this.name = "Admin";
-          this.tekst = tweett.content.replace('t', 'T');
-          console.log(this.tekst);
-          tweett.content = this.tekst;
-          this.content = tweett.content;
         },
         error => this.errorMessage = <any>error);
   }
