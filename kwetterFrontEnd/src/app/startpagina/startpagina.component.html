@@ -85,11 +85,12 @@
       <div class="tab-pane fade in" id="tab1">
         <h3>Tweet posten</h3>
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <button type="button" class="btn btn-default" (click)="addTweet(tweett.value);">Post tweet</button>
-          </div>
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-default" (click)="addTweet(tweett.value);">Post tweet</button>
+            </div>
           <textarea  [(ngModel)]="tweet.content" class="form-control" style="width: 500px;" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="140" #tweett></textarea>
           <span>{{140 - tweet.content.length}} left</span>
+
         </div>
 
       </div>
@@ -114,9 +115,9 @@
               <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
               <td class="text-center" style="width: 200px;">{{post.owner}}</td>
-              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center"  (click)="addLike(post.id);">Like</button></td>
-              <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center"  (click)="addFlag(post.id);">Flag</button></td>
-              <td style="width: 15px;"><button type="button" id="followButton" class="btn btn-default center-block text-center" onclick="myFunction()" (click)="followUser(post.owner);">Follow</button></td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-heart"  (click)="addLike(post.id);"></button></td>
+              <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-flag"  (click)="addFlag(post.id);"></button></td>
+              <td style="width: 15px;"><button type="button" id="followButton" class="btn btn-default center-block text-center glyphicon glyphicon-plus" onclick="myFunction()" (click)="followUser(post.owner);"></button></td>
             </tr>
             </tbody>
           </table>

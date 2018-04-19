@@ -165,6 +165,14 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
+  addUserWithObservable(name: any, password: any): Observable<Tweet> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post("http://localhost:8080/Kwetter/resources/users/register?username=" + name + "&password=" + password + "", options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
   editProfileWithObservable(profile: Profile): Observable<Profile> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });

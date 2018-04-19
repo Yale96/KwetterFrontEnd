@@ -10,9 +10,11 @@ import {AuthenticationService} from '../AuthenticationService';
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.html'],
-  providers: [AuthenticationService]
+  providers: [AuthenticationService, ApiService]
 })
 export class AuthenticationComponent implements OnInit {
+
+  errorMessage: string;
 
   model: any = {};
   loading = false;
@@ -20,7 +22,8 @@ export class AuthenticationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private apiSerive: ApiService) { }
 
   ngOnInit() {
     // reset login status
@@ -56,5 +59,12 @@ export class AuthenticationComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  registerUser(name: any, password: any): void  {
+    this.apiSerive.addUserWithObservable(name, password)
+      .subscribe( profilee => {
+        },
+        error => this.errorMessage = <any>error);
   }
 }

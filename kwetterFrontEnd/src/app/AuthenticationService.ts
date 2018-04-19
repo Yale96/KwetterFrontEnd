@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import * as decode from 'jwt-decode';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {ApiService} from './ApiService';
+import {Tweet} from './Tweet';
+import {User} from './User';
 
 @Injectable()
 export class AuthenticationService {
@@ -59,7 +61,6 @@ export class AuthenticationService {
         }
       });
   }
-
 
   getToken(): string{
     return localStorage.getItem('token');

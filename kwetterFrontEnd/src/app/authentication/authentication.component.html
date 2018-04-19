@@ -56,17 +56,17 @@
                     <div class="form-group">
                       <label for="usersName">Username:</label>
                       <input type="text" class="form-control" id="usersName"
-                             [(ngModel)]="model.username" name="username">
+                             [(ngModel)]="model.username" name="username" #registerName>
                     </div>
                     <div class="form-group">
                       <label for="passsWord">Password:</label>
                       <input type="password" class="form-control" id="passsWord"
-                             [(ngModel)]="model.password" name="password">
+                             [(ngModel)]="model.password" name="password" #registerPassword>
                     </div>
 
                     <div>
-                      <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
-                      <button type="button" class="btn btn-default" (click)="newUser(); userForm.reset()">Reset</button>
+                      <button type="submit" class="btn btn-success" (click)="registerUser(registerName.value, registerPassword.value); userForm.reset();" [disabled]="!userForm.form.valid">Submit</button>
+                      <button type="button" class="btn btn-default" (click)="userForm.reset();">Reset</button>
                     </div>
 
                     <div [hidden]="!submitted">
