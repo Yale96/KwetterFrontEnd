@@ -3,13 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {Tweet} from '../Tweet';
 import {Profile} from '../Profile';
 import {ApiService} from '../ApiService';
-import {AuthService} from '../AuthService';
+import {AuthenticationService} from '../AuthenticationService';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  providers: [ApiService, AuthService]
+  providers: [ApiService, AuthenticationService]
 })
 export class ProfileComponent implements OnInit {
 
@@ -27,12 +27,11 @@ export class ProfileComponent implements OnInit {
   bio: string;
   profilearray: Profile;
   tweetArray: Tweet;
-  constructor(private apiSerivce: ApiService, private authService: AuthService) {}
+  constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
+  }
 
-  logout()
-  {
-    this.authService.logout();
-    window.location.href = '/login';
+  logout() {
+    this.authenticationService.logout();
   }
 
 

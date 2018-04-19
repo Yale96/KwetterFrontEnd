@@ -5,13 +5,13 @@ import {User} from '../User';
 import {HashTag} from '../HashTag';
 import {ApiService} from '../ApiService';
 import {text} from '@angular/core/src/render3/instructions';
-import {AuthService} from '../AuthService';
+import {AuthenticationService} from '../AuthenticationService';
 
 @Component({
   selector: 'app-startpagina',
   templateUrl: './startpagina.component.html',
   styleUrls: ['./startpagina.component.css'],
-  providers: [ApiService, AuthService]
+  providers: [ApiService, AuthenticationService]
 })
 export class StartpaginaComponent implements OnInit {
 
@@ -27,13 +27,11 @@ export class StartpaginaComponent implements OnInit {
   tweet = new Tweet();
   id: number;
 
-  constructor(private apiSerivce: ApiService, private authService: AuthService) {
+  constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
   }
 
-  logout()
-  {
-    this.authService.logout();
-    window.location.href = '/login';
+  logout() {
+    this.authenticationService.logout();
   }
 
   getPosts(): void {

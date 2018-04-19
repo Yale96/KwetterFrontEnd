@@ -10,6 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import {HttpModule} from '@angular/http'; // <-- NgModel lives here
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {TokenInterceptor} from './TokenInterceptor';
 
 
 @NgModule({
@@ -26,7 +28,11 @@ import {HttpModule} from '@angular/http'; // <-- NgModel lives here
     ProfileComponent,
     AuthenticationComponent,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

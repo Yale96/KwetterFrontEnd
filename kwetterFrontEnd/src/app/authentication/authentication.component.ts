@@ -2,48 +2,43 @@ import {Component, OnInit} from '@angular/core';
 import {Profile} from '../Profile';
 import {User} from '../User';
 import {HttpClient} from '@angular/common/http';
-import {AuthService} from '../AuthService';
 import {ApiService} from '../ApiService';
+import { Router } from '@angular/router';
+import {AuthenticationService} from '../AuthenticationService';
 
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.html'],
-  providers: [AuthService]
+  providers: [AuthenticationService]
 })
 export class AuthenticationComponent implements OnInit {
-  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  user = new User();
+  model: any = {};
+  loading = false;
+  error = '';
 
-  onSubmit() { }
-
-  newUser() {
-    this.user = new User();
-    console.log('success');
-  }
-
-  onLogin() {
-
-  }
-
-  logout()
-  {
-    this.authService.logout();
-  }
-
-  login(stringOne: any, stringTwo: any) {
-    if (stringOne !== '' && stringTwo !== '') {
-      this.authService.login(stringOne, stringTwo)
-        .subscribe(
-          () => {
-            console.log("User is logged in");
-            window.location.href = '/startpagina';
-          }
-        );
-    }
-  }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    // reset login status
+    this.authenticationService.logout();
+  }
+
+  login(username: string, password: string) {
+    this.loading = true;
+    this.authenticationService.login(username, password)
+      .subscribe(result => {
+        if (result === true) {
+          // login successful
+          //window.location.href = '/startpagina';
+        } else {
+          // login failed
+          this.error = 'Username or password is incorrect';
+          this.loading = false;
+        }
+      });
   }
 }
