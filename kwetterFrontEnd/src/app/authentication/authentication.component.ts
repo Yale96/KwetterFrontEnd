@@ -25,15 +25,31 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit() {
     // reset login status
     this.authenticationService.logout();
+    console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token ' + localStorage.getItem('token'));
   }
 
   login(username: string, password: string) {
     this.loading = true;
+    this.authenticationService.findId(username)
+      .subscribe(result => {
+        if (result !== null) {
+          // login successful
+          //window.location.href = '/startpagina';
+          console.log('RESULT::::::' + result);
+          localStorage.setItem('userId', result.toString());
+          console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token ' + localStorage.getItem('token'));
+        } else {
+          // login failed
+          this.error = 'Username or password is incorrect';
+          this.loading = false;
+        }
+      });
+
     this.authenticationService.login(username, password)
       .subscribe(result => {
         if (result === true) {
           // login successful
-          //window.location.href = '/startpagina';
+          window.location.href = '/startpagina';
         } else {
           // login failed
           this.error = 'Username or password is incorrect';

@@ -31,8 +31,12 @@ export class ApiService {
   private followUser = "http://localhost:8080/Kwetter/resources/users/addFollower?id=2&superName=";
   private getByMatches = "http://localhost:8080/Kwetter/resources/tweets/bycontent?content=";
   private getTags = "http://localhost:8080/Kwetter/resources/hashtags";
+  private byname = "http://localhost:8080/Kwetter/resources/users/byname?name=";
+
+  private content: string;
 
   constructor(private http: Http) {
+
   }
 
   getRecent(): Observable<Tweet> {
@@ -153,10 +157,10 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
-  addTweetWithObservable(tweet: Tweet): Observable<Tweet> {
+  addTweetWithObservable(string: any, test: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.addURL + tweet.content, tweet, options)
+    return this.http.post("http://localhost:8080/Kwetter/resources/tweets/post?name=" + test + "&content=" + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

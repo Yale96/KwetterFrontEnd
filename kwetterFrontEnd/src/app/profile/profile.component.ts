@@ -40,6 +40,7 @@ export class ProfileComponent implements OnInit {
     this.getRecenteTweet();
     this.getTweetsByUserId();
     this.getFollowingUsers();
+    console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token ' + localStorage.getItem('token'));
   }
 
   getProfile(): void {

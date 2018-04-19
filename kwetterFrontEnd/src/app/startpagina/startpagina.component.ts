@@ -22,12 +22,15 @@ export class StartpaginaComponent implements OnInit {
   _statisticssArray: User;
   errorMessage: string;
   content: string;
+  naampje = localStorage.getItem('currentUser');
+
   name: string;
   user = new User();
   tweet = new Tweet();
   id: number;
 
   constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
+    this.naampje = this.naampje.replace(/"/g, "");
   }
 
   logout() {
@@ -79,6 +82,7 @@ export class StartpaginaComponent implements OnInit {
     this.getMentions();
     this.getStatistics();
     this.getTagss();
+    console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token' + localStorage.getItem('token'));
   }
 
   addFlag(idde: any): void {
@@ -113,8 +117,9 @@ export class StartpaginaComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  addTweet(): void {
-    this.apiSerivce.addTweetWithObservable(this.tweet)
+  addTweet(string: string, test: any): void {
+    string = string.replace('#', '%23');
+    this.apiSerivce.addTweetWithObservable(string, this.naampje)
       .subscribe( tweett => {
           this.getPosts();
         },
