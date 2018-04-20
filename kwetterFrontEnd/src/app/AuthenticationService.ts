@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import * as decode from 'jwt-decode';
+import * as jwt_decode from 'jwt-decode';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {ApiService} from './ApiService';
 import {Tweet} from './Tweet';
@@ -31,6 +31,7 @@ export class AuthenticationService {
           this.token = token;
           console.log('THIS TOKEN: ' + this.token);
 
+          
           // store username and jwt token in local storage to keep user logged in between page refreshes
           // localStorage.setItem('userId', JSON.stringify({n}));
           localStorage.setItem('currentUser', JSON.stringify(userName.toString()));

@@ -110,14 +110,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let post of _postsArray;">
+            <tr *ngFor="let post of _postsArray">
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
               <td class="text-center" style="width: 200px;">{{post.owner}}</td>
-              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-heart"  (click)="addLike(post.id);"></button></td>
-              <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-flag"  (click)="addFlag(post.id);"></button></td>
-              <td style="width: 15px;"><button type="button" id="followButton" class="btn btn-default center-block text-center glyphicon glyphicon-plus" onclick="myFunction()" (click)="followUser(post.owner);"></button></td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-heart" (click)="addLike(post.id);"></button></td>
+              <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-flag" (click)="addFlag(post.id);"></button></td>
+              <td style="width: 15px;"><button type="button" id="followButton" class="btn btn-default center-block text-center glyphicon glyphicon-plus" (click)="followUser(post.owner);"></button></td>
             </tr>
             </tbody>
           </table>

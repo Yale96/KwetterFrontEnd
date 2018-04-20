@@ -16,6 +16,9 @@ const API_URL = environment.apiUrl;
 export class ApiService {
 
   private _postsURL = "http://localhost:8080/Kwetter/resources/tweets";
+  private checkLike = "http://localhost:8080/Kwetter/resources/tweets/checklike";
+  private checkFlag = "http://localhost:8080/Kwetter/resources/tweets/checkflag";
+  private checkFollow = "";
   private addURL = "http://localhost:8080/Kwetter/resources/tweets/post?name=Admin&content=";
   private getMentionsUrl = "http://localhost:8080/Kwetter/resources/tweets/mentionname?name=Admin";
   private getUser = "http://localhost:8080/Kwetter/resources/users/single?name=Admin";
@@ -187,6 +190,22 @@ export class ApiService {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post("http://localhost:8080/Kwetter/resources/tweets/post?name=" + test + "&content=" + string, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  checkLikeWithObservable(string: any, id: any): Observable<boolean> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('http://localhost:8080/Kwetter/resources/tweets/checklike?name=' + string + '&tweetId=' + id, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
+  checkFlagWithObservable(string: any, id: any): Observable<boolean> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get('http://localhost:8080/Kwetter/resources/tweets/checkflag?name=' + string + '&tweetId=' + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

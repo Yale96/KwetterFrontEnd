@@ -24,6 +24,8 @@ export class StartpaginaComponent implements OnInit {
   errorMessage: string;
   content: string;
   naampje = localStorage.getItem('currentUser');
+  checkBoolLike: boolean;
+  checkBoolFlag: boolean;
 
   name: string;
   user = new User();
@@ -91,6 +93,24 @@ export class StartpaginaComponent implements OnInit {
       );
   }
 
+  checkLike(string: any, id: any): boolean {
+    this.apiSerivce.checkLikeWithObservable(string, id)
+      .subscribe(
+        resultArray => this.checkBoolLike = resultArray,
+        error => console.log("Error :: " + error)
+      );
+    return this.checkBoolLike;
+  }
+
+  checkFlag(string: any, id: any): boolean {
+    this.apiSerivce.checkFlagWithObservable(string, id)
+      .subscribe(
+        resultArray => this.checkBoolFlag = resultArray,
+        error => console.log("Error :: " + error)
+      );
+    return this.checkBoolFlag;
+  }
+
   getStatistics(): void {
     this.apiSerivce.getStatistics()
       .subscribe(
@@ -148,5 +168,7 @@ export class StartpaginaComponent implements OnInit {
           this.getPosts();
         },
         error => this.errorMessage = <any>error);
+    // this.checkFlag(naampje, 1);
+    // this.checkLike(naampje, 1);
   }
 }
