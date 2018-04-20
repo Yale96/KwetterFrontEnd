@@ -15,10 +15,11 @@ import {AuthenticationService} from '../AuthenticationService';
 })
 export class StartpaginaComponent implements OnInit {
 
-  _postsArray: Tweet[];
+  _postsArray: Tweet[] = [];
   _mentionsArray: Tweet[];
   _matchesArray: Tweet[];
   tagsArray: HashTag[];
+  stringsArray: string[];
   _statisticssArray: User;
   errorMessage: string;
   content: string;
@@ -40,7 +41,20 @@ export class StartpaginaComponent implements OnInit {
   getPosts(): void {
     this.apiSerivce.getPosts()
       .subscribe(
-        resultArray => this._postsArray = resultArray,
+        (tweets) => {
+          this._postsArray = tweets;
+        },
+          error => console.log("Error :: " + error)
+      );
+  }
+
+  getPostss(): void {
+    this.apiSerivce.getPostss()
+      .subscribe(
+        (tweets) => {
+          this._postsArray = tweets;
+        },
+
         error => console.log("Error :: " + error)
       );
   }
@@ -49,6 +63,14 @@ export class StartpaginaComponent implements OnInit {
     this.apiSerivce.getMentions()
       .subscribe(
         resultArray => this._mentionsArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
+  }
+
+  getTrends(): void {
+    this.apiSerivce.getTrendss()
+      .subscribe(
+        resultArray => this.stringsArray = resultArray,
         error => console.log("Error :: " + error)
       );
   }
@@ -82,6 +104,8 @@ export class StartpaginaComponent implements OnInit {
     this.getMentions();
     this.getStatistics();
     this.getTagss();
+    this.getTrends();
+    this.getPostss();
     console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token' + localStorage.getItem('token'));
   }
 

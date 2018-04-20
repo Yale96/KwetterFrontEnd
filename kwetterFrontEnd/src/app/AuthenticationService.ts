@@ -12,6 +12,7 @@ import {User} from './User';
 export class AuthenticationService {
   public token: string;
   public  onlyToken: string;
+  public tokennn: string;
 
   constructor(private http: Http) {
     // set token if saved in local storage
@@ -62,10 +63,11 @@ export class AuthenticationService {
       });
   }
 
-  getToken(): string{
-    return localStorage.getItem('token');
+  getToken(): string {
+    this.tokennn = localStorage.getItem('token');
+    this.tokennn = this.tokennn.replace(/"/g, "");
+    return this.tokennn;
   }
-
 
   logout(): void {
     // clear token remove user from local storage to log user out

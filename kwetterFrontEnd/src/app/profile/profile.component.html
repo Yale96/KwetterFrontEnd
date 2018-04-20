@@ -37,7 +37,7 @@
     <div class="useravatar">
       <img alt="" src="{{profilearray.picture}}">
     </div>
-    <div class="card-info"> <span class="card-title">{{profilearray.name}} - Profiel</span>
+    <div class="card-info"> <span class="card-title">{{naampje}} - Profiel</span>
 
     </div>
   </div>
@@ -118,7 +118,7 @@
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
-              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default"  (click)="remove(post.id);">Remove</button></td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-trash" (click)="remove(post.id);"></button></td>
             </tr>
             </tbody>
           </table>

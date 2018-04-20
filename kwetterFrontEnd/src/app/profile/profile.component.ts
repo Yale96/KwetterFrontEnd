@@ -27,7 +27,9 @@ export class ProfileComponent implements OnInit {
   bio: string;
   profilearray: Profile;
   tweetArray: Tweet;
+  naampje = localStorage.getItem('currentUser');
   constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
+    this.naampje = this.naampje.replace(/"/g, "");
   }
 
   logout() {
@@ -44,7 +46,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfile(): void {
-    this.apiSerivce.getProfile()
+    this.apiSerivce.getProfile(this.naampje)
       .subscribe(
         resultArray => this.profilearray = resultArray,
         error => console.log("Error :: " + error)
@@ -60,7 +62,7 @@ export class ProfileComponent implements OnInit {
   }
 
   remove(idd): void {
-    this.apiSerivce.removeTweetWithObservable(this.tweet)
+    this.apiSerivce.removeTweetWithObservable(idd)
       .subscribe( tweett => {
           this.namee = "Admin";
           tweett.id = idd;

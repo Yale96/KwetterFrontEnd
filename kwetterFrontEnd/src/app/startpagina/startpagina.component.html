@@ -42,13 +42,13 @@
   </nav>
   <div class="card hovercard">
     <div class="card-background">
-      <img class="card-bkimg" alt="" src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/29513296_1186175838186308_7575881302090863203_n.jpg?_nc_cat=0&oh=bda2a498bfd0841fe6c2a58b9d976a7c&oe=5B74945A">
+      <img class="card-bkimg" alt="" src="https://cdn.downdetector.com/static/uploads/c/300/3e7e3/twitter-logo_21.png">
       <!-- http://lorempixel.com/850/280/people/9/ -->
     </div>
     <div class="useravatar">
-      <img alt="" src="https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/29513296_1186175838186308_7575881302090863203_n.jpg?_nc_cat=0&oh=bda2a498bfd0841fe6c2a58b9d976a7c&oe=5B74945A">
+      <img alt="" src="https://cdn.downdetector.com/static/uploads/c/300/3e7e3/twitter-logo_21.png">
     </div>
-    <div class="card-info"> <span class="card-title">{{naampje}} - Profiel</span>
+    <div class="card-info"> <span class="card-title">{{naampje}} - Startpagina</span>
 
     </div>
   </div>
@@ -174,14 +174,12 @@
           <table class="table">
             <thead class="thead-inverse">
             <tr>
-              <th class="text-center">Tag</th>
-              <th class="text-center">Laad tweets</th>
+              <th class="text-center">Trend</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let tag of tagsArray;">
-              <td class="text-center" style="width: 15px;">{{tag.content}}</td>
-              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center"  (click)="addLike(tag.content);">Laadt</button></td>
+            <tr *ngFor="let string of stringsArray;">
+              <td class="text-center" style="width: 15px;">{{string}}</td>
             </tr>
             </tbody>
           </table>

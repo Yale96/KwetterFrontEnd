@@ -7,6 +7,10 @@ import {User} from './User';
 import { Headers, RequestOptions } from '@angular/http';
 import {Profile} from './Profile';
 import {HashTag} from './HashTag';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../environments/environment';
+
+const API_URL = environment.apiUrl;
 
 @Injectable()
 export class ApiService {
@@ -23,7 +27,7 @@ export class ApiService {
   private editWeb = "http://localhost:8080/Kwetter/resources/profiles/edit/web?id=1&toEdit=";
   private editLocatie = "http://localhost:8080/Kwetter/resources/profiles/locatie/picture?id=1&toEdit=";
   private editBio = "http://localhost:8080/Kwetter/resources/profiles/edit/bio?id=1&toEdit=";
-  private getProfileByName = "http://localhost:8080/Kwetter/resources/users/getProfileByName?name=Admin";
+  private getProfileByName = "http://localhost:8080/Kwetter/resources/users/getProfileByName?name=";
   private getRecentTweet = "http://localhost:8080/Kwetter/resources/tweets/userid/recent?id=2";
   private getTweetByUserId = "http://localhost:8080/Kwetter/resources/tweets/userid?id=1";
   private removeTweet = "http://localhost:8080/Kwetter/resources/tweets/remove?id=";
@@ -32,10 +36,13 @@ export class ApiService {
   private getByMatches = "http://localhost:8080/Kwetter/resources/tweets/bycontent?content=";
   private getTags = "http://localhost:8080/Kwetter/resources/hashtags";
   private byname = "http://localhost:8080/Kwetter/resources/users/byname?name=";
+  private trends = "http://localhost:8080/Kwetter/resources/hashtags/trends";
 
   private content: string;
 
-  constructor(private http: Http) {
+
+
+  constructor(private http: Http, private https: HttpClient) {
 
   }
 
@@ -53,6 +60,15 @@ export class ApiService {
       .get(this.getTags)
       .map((response: Response) => {
         return <HashTag[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getTrendss(): Observable<string[]> {
+    return this.http
+      .get(this.trends)
+      .map((response: Response) => {
+        return <string[]>response.json();
       })
       .catch(this.handleError);
   }
@@ -83,9 +99,19 @@ export class ApiService {
       })
       .catch(this.handleError);
   }
-
+  getPostss(): Observable<Tweet[]> {
+    console.log(this.https.get('http://localhost:8080/Kwetter/resources/tweets/gettweetss'));
+    return this.https
+      .get('http://localhost:8080/Kwetter/resources/tweets/gettweetss')
+      .map(response => {
+        const tweets = response;
+        return tweets;
+      })
+      .catch(this.handleError);
+  }
 
   getPosts(): Observable<Tweet[]> {
+    console.log(this.http.get(this._postsURL));
     return this.http
       .get(this._postsURL)
       .map((response: Response) => {
@@ -94,9 +120,9 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getProfile(): Observable<Profile> {
+  getProfile(string: any): Observable<Profile> {
     return this.http
-      .get(this.getProfileByName)
+      .get(this.getProfileByName + string)
       .map((response: Response) => {
         return <Profile>response.json();
       })
@@ -125,10 +151,10 @@ export class ApiService {
     return Observable.throw(error.statusText);
   }
 
-  removeTweetWithObservable(tweet: Tweet): Observable<Tweet> {
+  removeTweetWithObservable(id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.delete(this.removeTweet + tweet.id, options)
+    return this.http.post(this.removeTweet + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

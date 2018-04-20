@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import {HttpModule} from '@angular/http'; // <-- NgModel lives here
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {TokenInterceptor} from './TokenInterceptor';
+import {AuthenticationService} from './AuthenticationService';
+import {ApiService} from './ApiService';
 
 
 @NgModule({
@@ -20,19 +22,23 @@ import {TokenInterceptor} from './TokenInterceptor';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
     StartpaginaComponent,
     ProfileComponent,
-    AuthenticationComponent,
+    AuthenticationComponent
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    ApiService, HttpClientModule],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }
