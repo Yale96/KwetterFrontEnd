@@ -34,6 +34,8 @@ export class StartpaginaComponent implements OnInit {
   checkBoolFlag: boolean;
   profilearray: Profile;
 
+  tweettt = new Tweet();
+  t = new Tweet();
   tweetjes: Observable<Tweet>;
   name: string;
   user = new User();
@@ -84,6 +86,15 @@ export class StartpaginaComponent implements OnInit {
         resultArray => this.stringsArray = resultArray,
         error => console.log("Error :: " + error)
       );
+  }
+
+  getSingle(): Tweet {
+    this.apiSerivce.getSingle()
+      .subscribe(
+        resultArray => this.tweettt = resultArray,
+        error => console.log("Error :: " + error)
+      );
+    return this.tweettt;
   }
 
   getTagss(): void {
@@ -179,6 +190,10 @@ export class StartpaginaComponent implements OnInit {
           this.getPosts();
           this.getStatistics();
           this.getTrends();
+          this.t = this.getSingle();
+          console.log('T ID::::::::: ' + this.t);
+          this.checkLike(this.t.id);
+          this.checkFlag(this.t.id);
         },
         error => this.errorMessage = <any>error);
     // this.checkFlag(naampje, 1);

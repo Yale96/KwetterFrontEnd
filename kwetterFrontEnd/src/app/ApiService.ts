@@ -132,6 +132,16 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  getSingle(): Observable<Tweet> {
+    return this.http
+      .get("http://localhost:8080/Kwetter/resources/tweets/highest")
+      .map((response: Response) => {
+        return <Tweet>response.json();
+      })
+      .catch(this.handleError);
+  }
+
+
   getMentions(string: any): Observable<Tweet[]> {
     return this.http
       .get(this.getMentionsUrl + string)

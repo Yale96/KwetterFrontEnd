@@ -1,7 +1,11 @@
 export class Tweet {
-  id: number;
   content: string;
-  timeStamp: string;
+  flagsCount: number;
+  id: number;
+  likesCount: number;
+  mentionsCount: number;
   owner: string;
+  tagsCount: number;
+  timeStamp: string;
   constructor() {}
 }
