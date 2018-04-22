@@ -34,6 +34,7 @@ export class StartpaginaComponent implements OnInit {
   checkBoolFlag: boolean;
   profilearray: Profile;
 
+  tweetjes: Observable<Tweet>;
   name: string;
   user = new User();
   tweet = new Tweet();
@@ -178,11 +179,6 @@ export class StartpaginaComponent implements OnInit {
           this.getPosts();
           this.getStatistics();
           this.getTrends();
-          this.tweetarray.push(tweett);
-          this.tweet = tweett
-          this.checkFlag(tweett.id);
-          this.checkLike(tweett.id);
-          console.log("TWEETT::::: " + this.tweet);
         },
         error => this.errorMessage = <any>error);
     // this.checkFlag(naampje, 1);
