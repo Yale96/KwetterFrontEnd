@@ -7,6 +7,8 @@ import {ApiService} from '../ApiService';
 import {text} from '@angular/core/src/render3/instructions';
 import {AuthenticationService} from '../AuthenticationService';
 import {Profile} from '../Profile';
+import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-startpagina',
@@ -17,10 +19,12 @@ import {Profile} from '../Profile';
 export class StartpaginaComponent implements OnInit {
 
   _postsArray: Tweet[] = [];
+  tweetarray: Tweet[] = [];
   _mentionsArray: Tweet[];
   _matchesArray: Tweet[];
   tagsArray: HashTag[];
   stringsArray: string[];
+  idArray: number[] = [];
   _statisticssArray: User;
   errorMessage: string;
   content: string;
@@ -48,6 +52,7 @@ export class StartpaginaComponent implements OnInit {
       .subscribe(
         (tweets) => {
           this._postsArray = tweets;
+          console.log("POST ARRAY:::::::::::::::: " + this._postsArray);
         },
           error => console.log("Error :: " + error)
       );
@@ -96,22 +101,22 @@ export class StartpaginaComponent implements OnInit {
       );
   }
 
-  checkLike(string: any, id: any): boolean {
-    this.apiSerivce.checkLikeWithObservable(string, id)
+  checkLike(id: any): void {
+    this.apiSerivce.checkLikeWithObservable(this.naampje, id)
       .subscribe(
         resultArray => this.checkBoolLike = resultArray,
         error => console.log("Error :: " + error)
       );
-    return this.checkBoolLike;
+    console.log("BOOL LIKE:::: " + this.checkBoolLike);
   }
 
-  checkFlag(string: any, id: any): boolean {
-    this.apiSerivce.checkFlagWithObservable(string, id)
+  checkFlag(id: any): void {
+    this.apiSerivce.checkFlagWithObservable(this.naampje, id)
       .subscribe(
         resultArray => this.checkBoolFlag = resultArray,
         error => console.log("Error :: " + error)
       );
-    return this.checkBoolFlag;
+    console.log("BOOL FLAG:::: " + this.checkBoolFlag);
   }
 
   getStatistics(): void {
@@ -173,6 +178,11 @@ export class StartpaginaComponent implements OnInit {
           this.getPosts();
           this.getStatistics();
           this.getTrends();
+          this.tweetarray.push(tweett);
+          this.tweet = tweett
+          this.checkFlag(tweett.id);
+          this.checkLike(tweett.id);
+          console.log("TWEETT::::: " + this.tweet);
         },
         error => this.errorMessage = <any>error);
     // this.checkFlag(naampje, 1);
