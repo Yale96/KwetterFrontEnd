@@ -23,7 +23,7 @@
 </head>
 
 
-
+<div class="col-lg-14 col-sm-14" id="dimscreen">
 <!------ Include the above in your HEAD tag ---------->
 <div class="col-lg-6 col-sm-6">
   <nav class="navbar navbar-inverse">
@@ -114,7 +114,7 @@
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
-              <td class="text-center" style="width: 200px;">{{post.owner}}</td>
+              <td class="text-center"  style="width: 200px;">{{post.owner}}</td>
               <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-heart" (click)="addLike(post.id);"></button></td>
               <td style="width: 15px;"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-flag" (click)="addFlag(post.id);"></button></td>
               <td style="width: 15px;"><button type="button" id="followButton" class="btn btn-default center-block text-center glyphicon glyphicon-plus" (click)="followUser(post.owner);"></button></td>
@@ -211,6 +211,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 

@@ -6,6 +6,7 @@ import {HashTag} from '../HashTag';
 import {ApiService} from '../ApiService';
 import {text} from '@angular/core/src/render3/instructions';
 import {AuthenticationService} from '../AuthenticationService';
+import {Profile} from '../Profile';
 
 @Component({
   selector: 'app-startpagina',
@@ -27,6 +28,7 @@ export class StartpaginaComponent implements OnInit {
   idtje = localStorage.getItem('userId');
   checkBoolLike: boolean;
   checkBoolFlag: boolean;
+  profilearray: Profile;
 
   name: string;
   user = new User();
@@ -130,6 +132,7 @@ export class StartpaginaComponent implements OnInit {
     console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token' + localStorage.getItem('token'));
   }
 
+
   addFlag(idde: any): void {
     this.apiSerivce.addFlagWithObservable(this.naampje, idde)
       .subscribe( tweett => {
@@ -146,6 +149,7 @@ export class StartpaginaComponent implements OnInit {
     this.apiSerivce.followUserWithObservable(this.idtje, string)
       .subscribe( user => {
           this.getPosts();
+          this.getStatistics();
         },
         error => this.errorMessage = <any>error);
   }
@@ -167,6 +171,8 @@ export class StartpaginaComponent implements OnInit {
     this.apiSerivce.addTweetWithObservable(string, this.naampje)
       .subscribe( tweett => {
           this.getPosts();
+          this.getStatistics();
+          this.getTrends();
         },
         error => this.errorMessage = <any>error);
     // this.checkFlag(naampje, 1);

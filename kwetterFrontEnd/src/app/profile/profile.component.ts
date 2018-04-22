@@ -4,6 +4,7 @@ import {Tweet} from '../Tweet';
 import {Profile} from '../Profile';
 import {ApiService} from '../ApiService';
 import {AuthenticationService} from '../AuthenticationService';
+import {User} from '../User';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
   web: string;
   location: string;
   bio: string;
+  _statisticssArray: User;
   profilearray: Profile;
   tweetArray: Tweet;
   naampje = localStorage.getItem('currentUser');
@@ -44,7 +46,16 @@ export class ProfileComponent implements OnInit {
     this.getRecenteTweet();
     this.getTweetsByUserId();
     this.getFollowingUsers();
+    this.getStatistics();
     console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token ' + localStorage.getItem('token'));
+  }
+
+  getStatistics(): void {
+    this.apiSerivce.getStatistics(this.naampje)
+      .subscribe(
+        resultArray => this._statisticssArray = resultArray,
+        error => console.log("Error :: " + error)
+      );
   }
 
   getProfile(): void {
@@ -61,6 +72,7 @@ export class ProfileComponent implements OnInit {
         resultArray => this.tweetArray = resultArray,
         error => console.log("Error :: " + error)
       );
+    this.getStatistics();
   }
 
   remove(idd): void {
@@ -70,6 +82,8 @@ export class ProfileComponent implements OnInit {
           tweett.id = idd;
           console.log('HET GESELECTEERDE ID' + idd);
           this.id = tweett.id;
+          this.getStatistics();
+          this.getTweetsByUserId();
         },
         error => this.errorMessage = <any>error);
   }
@@ -80,6 +94,7 @@ export class ProfileComponent implements OnInit {
         resultArray => this.stringsArray = resultArray,
         error => console.log("Error :: " + error)
       );
+    this.getStatistics();
   }
 
   getTweetsByUserId(): void {
@@ -88,6 +103,7 @@ export class ProfileComponent implements OnInit {
         resultArray => this._postsArray = resultArray,
         error => console.log("Error :: " + error)
       );
+    this.getStatistics();
   }
 
   editProfilePicture(string: any): void  {
