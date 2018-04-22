@@ -24,6 +24,7 @@ export class StartpaginaComponent implements OnInit {
   errorMessage: string;
   content: string;
   naampje = localStorage.getItem('currentUser');
+  idtje = localStorage.getItem('userId');
   checkBoolLike: boolean;
   checkBoolFlag: boolean;
 
@@ -62,7 +63,7 @@ export class StartpaginaComponent implements OnInit {
   }
 
   getMentions(): void {
-    this.apiSerivce.getMentions()
+    this.apiSerivce.getMentions(this.naampje)
       .subscribe(
         resultArray => this._mentionsArray = resultArray,
         error => console.log("Error :: " + error)
@@ -112,7 +113,7 @@ export class StartpaginaComponent implements OnInit {
   }
 
   getStatistics(): void {
-    this.apiSerivce.getStatistics()
+    this.apiSerivce.getStatistics(this.naampje)
       .subscribe(
         resultArray => this._statisticssArray = resultArray,
         error => console.log("Error :: " + error)
@@ -130,7 +131,7 @@ export class StartpaginaComponent implements OnInit {
   }
 
   addFlag(idde: any): void {
-    this.apiSerivce.addFlagWithObservable(idde)
+    this.apiSerivce.addFlagWithObservable(this.naampje, idde)
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
@@ -142,7 +143,7 @@ export class StartpaginaComponent implements OnInit {
   }
 
   followUser(string: any): void {
-    this.apiSerivce.followUserWithObservable(string)
+    this.apiSerivce.followUserWithObservable(this.idtje, string)
       .subscribe( user => {
           this.getPosts();
         },
@@ -150,7 +151,7 @@ export class StartpaginaComponent implements OnInit {
   }
 
   addLike(idde: any): void {
-    this.apiSerivce.addLikeWithObservable(idde)
+    this.apiSerivce.addLikeWithObservable(this.naampje, idde)
       .subscribe( tweett => {
           this.getPosts();
           this.name = "Admin";
@@ -161,7 +162,7 @@ export class StartpaginaComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
-  addTweet(string: string, test: any): void {
+  addTweet(string: string): void {
     string = string.replace('#', '%23');
     this.apiSerivce.addTweetWithObservable(string, this.naampje)
       .subscribe( tweett => {

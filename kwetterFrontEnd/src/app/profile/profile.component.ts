@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit {
   profilearray: Profile;
   tweetArray: Tweet;
   naampje = localStorage.getItem('currentUser');
+  idtje = localStorage.getItem('userId');
+
   constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
     this.naampje = this.naampje.replace(/"/g, "");
   }
@@ -54,7 +56,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getRecenteTweet(): void {
-    this.apiSerivce.getRecent()
+    this.apiSerivce.getRecent(this.idtje)
       .subscribe(
         resultArray => this.tweetArray = resultArray,
         error => console.log("Error :: " + error)
@@ -73,7 +75,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getFollowingUsers(): void {
-    this.apiSerivce.getFollowing()
+    this.apiSerivce.getFollowing(this.idtje)
       .subscribe(
         resultArray => this.stringsArray = resultArray,
         error => console.log("Error :: " + error)
@@ -81,7 +83,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getTweetsByUserId(): void {
-    this.apiSerivce.getByUserId()
+    this.apiSerivce.getByUserId(this.idtje)
       .subscribe(
         resultArray => this._postsArray = resultArray,
         error => console.log("Error :: " + error)
@@ -89,7 +91,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfilePicture(string: any): void  {
-    this.apiSerivce.editProfilePictureWithObservable(string)
+    this.apiSerivce.editProfilePictureWithObservable(this.idtje, string)
       .subscribe( profilee => {
           profilee.picture = string;
           this.picture = profilee.picture;
@@ -98,7 +100,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfileName(string: any): void  {
-    this.apiSerivce.editProfileNameWithObservable(string)
+    this.apiSerivce.editProfileNameWithObservable(this.idtje, string)
       .subscribe( profilee => {
           profilee.name = string;
           this.namee = profilee.name;
@@ -107,7 +109,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfileWeb(string: any): void  {
-    this.apiSerivce.editProfileWebWithObservable(string)
+    this.apiSerivce.editProfileWebWithObservable(this.idtje, string)
       .subscribe( profilee => {
           profilee.web = string;
           this.web = profilee.web;
@@ -116,7 +118,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfileLocatie(string: any): void  {
-    this.apiSerivce.editProfileLocatieWithObservable(string)
+    this.apiSerivce.editProfileLocatieWithObservable(this.idtje, string)
       .subscribe( profilee => {
           profilee.location = string + ', Netherlands';
           this.location = profilee.location;
@@ -125,7 +127,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfileBio(string: any): void  {
-    this.apiSerivce.editProfileBiographyWithObservable(string)
+    this.apiSerivce.editProfileBiographyWithObservable(this.idtje, string)
       .subscribe( profilee => {
           profilee.bio = string;
           this.bio = profilee.bio;
