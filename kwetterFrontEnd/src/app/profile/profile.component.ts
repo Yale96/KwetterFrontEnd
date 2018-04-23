@@ -51,11 +51,11 @@ export class ProfileComponent implements OnInit {
   }
 
   getStatistics(): void {
-    this.apiSerivce.getStatistics(this.naampje)
-      .subscribe(
-        resultArray => this._statisticssArray = resultArray,
-        error => console.log("Error :: " + error)
-      );
+    this.apiSerivce.getStatistics(this.naampje).subscribe(data => {
+      console.log('DATA::::::::::: ' + data);
+      this._statisticssArray = data;
+      console.log('DATA::::::::::: ' + this._statisticssArray.username + ', ' + this._statisticssArray.tweetsCount);
+    });
   }
 
   getProfile(): void {
