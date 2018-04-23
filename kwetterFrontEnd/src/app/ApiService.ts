@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import {Http, Response, ResponseType} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import "rxjs/Rx";
 import {Tweet} from "./tweet";
@@ -103,9 +103,10 @@ export class ApiService {
       .catch(this.handleError);
   }
   getPostss(): Observable<Tweet[]> {
+    const options = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
     console.log(this.https.get('http://localhost:8080/Kwetter/resources/tweets/gettweetss'));
     return this.https
-      .get('http://localhost:8080/Kwetter/resources/tweets/gettweetss')
+      .get('http://localhost:8080/Kwetter/resources/tweets/gettweetss', options)
       .map(response => {
         const tweets = response;
         return tweets;
@@ -133,12 +134,8 @@ export class ApiService {
   }
 
   getSingle(): Observable<Tweet> {
-    return this.http
-      .get("http://localhost:8080/Kwetter/resources/tweets/highest")
-      .map((response: Response) => {
-        return <Tweet>response.json();
-      })
-      .catch(this.handleError);
+    const options = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.https.get<Tweet>("http://localhost:8080/Kwetter/resources/tweets/highest", options);
   }
 
 
@@ -205,19 +202,21 @@ export class ApiService {
   }
 
   checkLikeWithObservable(string: any, id: any): Observable<boolean> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get('http://localhost:8080/Kwetter/resources/tweets/checklike?name=' + string + '&tweetId=' + id, options)
-      .map(this.extractData)
-      .catch(this.handleErrorObservable);
+    return this.http
+      .get('http://localhost:8080/Kwetter/resources/tweets/checklike?name=' + string + '&tweetId=' + id)
+      .map((response: Response) => {
+        return <Tweet>response.json();
+      })
+      .catch(this.handleError);
   }
 
   checkFlagWithObservable(string: any, id: any): Observable<boolean> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get('http://localhost:8080/Kwetter/resources/tweets/checkflag?name=' + string + '&tweetId=' + id, options)
-      .map(this.extractData)
-      .catch(this.handleErrorObservable);
+    return this.http
+      .get('http://localhost:8080/Kwetter/resources/tweets/checkflag?name=' + string + '&tweetId=' + id)
+      .map((response: Response) => {
+        return <Tweet>response.json();
+      })
+      .catch(this.handleError);
   }
 
   addUserWithObservable(name: any, password: any): Observable<Tweet> {

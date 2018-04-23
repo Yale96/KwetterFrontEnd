@@ -32,14 +32,18 @@ export class StartpaginaComponent implements OnInit {
   idtje = localStorage.getItem('userId');
   checkBoolLike: boolean;
   checkBoolFlag: boolean;
+  checkBoolFollow: boolean;
   profilearray: Profile;
 
-  tweettt = new Tweet();
+
+
   t = new Tweet();
   tweetjes: Observable<Tweet>;
   name: string;
   user = new User();
+  tweett: Tweet;
   tweet = new Tweet();
+  tweettt: Tweet;
   id: number;
 
   constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
@@ -89,12 +93,12 @@ export class StartpaginaComponent implements OnInit {
   }
 
   getSingle(): Tweet {
-    this.apiSerivce.getSingle()
-      .subscribe(
-        resultArray => this.tweettt = resultArray,
-        error => console.log("Error :: " + error)
-      );
-    return this.tweettt;
+    this.apiSerivce.getSingle().subscribe(data => {
+      console.log('DATA::::::::::: ' + data);
+      this.tweett = data;
+      console.log('DATA::::::::::: ' + this.tweett.owner + ', ' + this.tweett.id);
+    });
+    return this.tweett;
   }
 
   getTagss(): void {
@@ -113,22 +117,24 @@ export class StartpaginaComponent implements OnInit {
       );
   }
 
-  checkLike(id: any): void {
+  checkLike(id: any): boolean {
     this.apiSerivce.checkLikeWithObservable(this.naampje, id)
       .subscribe(
         resultArray => this.checkBoolLike = resultArray,
         error => console.log("Error :: " + error)
       );
     console.log("BOOL LIKE:::: " + this.checkBoolLike);
+    return this.checkBoolLike;
   }
 
-  checkFlag(id: any): void {
+  checkFlag(id: any): boolean {
     this.apiSerivce.checkFlagWithObservable(this.naampje, id)
       .subscribe(
         resultArray => this.checkBoolFlag = resultArray,
         error => console.log("Error :: " + error)
       );
     console.log("BOOL FLAG:::: " + this.checkBoolFlag);
+    return this.checkBoolFlag;
   }
 
   getStatistics(): void {
@@ -146,9 +152,18 @@ export class StartpaginaComponent implements OnInit {
     this.getTagss();
     this.getTrends();
     this.getPostss();
+    this.getSingle();
     console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token' + localStorage.getItem('token'));
   }
 
+  checkFollow(string: string): void{
+    if(this.naampje === string)
+    {
+      this.checkBoolFollow = false;
+    }
+    else
+      this.checkBoolFollow = true;
+  }
 
   addFlag(idde: any): void {
     this.apiSerivce.addFlagWithObservable(this.naampje, idde)
@@ -187,15 +202,22 @@ export class StartpaginaComponent implements OnInit {
     string = string.replace('#', '%23');
     this.apiSerivce.addTweetWithObservable(string, this.naampje)
       .subscribe( tweett => {
+          this.tweettt = this.getSingle();
           this.getPosts();
           this.getStatistics();
           this.getTrends();
-          this.t = this.getSingle();
-          console.log('T ID::::::::: ' + this.t);
-          this.checkLike(this.t.id);
-          this.checkFlag(this.t.id);
+          this.checkFollow(this.tweettt.owner);
+          console.log('TWEETTT::::' + tweett)
         },
         error => this.errorMessage = <any>error);
+        console.log('T ID::::::::: ' + this.tweettt.id);
+        console.log('T OWNER::::::::: ' + this.tweettt.owner);
+        this.checkLike(this.tweettt.id);
+        this.checkFlag(this.tweettt.id);
+        this.checkFollow(this.tweettt.owner);
+        this.getStatistics();
+        console.log('BOOL FOLLOW::::::::: ' + this.checkBoolFollow);
+
     // this.checkFlag(naampje, 1);
     // this.checkLike(naampje, 1);
   }

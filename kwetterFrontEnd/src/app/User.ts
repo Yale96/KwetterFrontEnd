@@ -1,10 +1,15 @@
 export class User {
-  username: string;
-  password: string;
-  tweetsCount: number;
+  email: string;
+  flagsCount: number;
+  followers: any[];
   followersCount: number;
-  supersCount: number;
+  id: number;
+  likesCount: number;
+  mentionsCount: number;
   profileDTO: number;
-  roleDTO: number;
+  roleDTO: string;
+  supersCount: number;
+  tweetsCount: number;
+  username: string;
   constructor() { }
 }
