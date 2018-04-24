@@ -66,7 +66,7 @@ export class StartpaginaComponent implements OnInit {
   }
 
   getPostsOwn(): void {
-    this.apiSerivce.getPosts()
+    this.apiSerivce.getPostsOwn(this.idtje)
       .subscribe(
         (tweets) => {
           this.ownAndOthersArray = tweets;
@@ -165,6 +165,7 @@ export class StartpaginaComponent implements OnInit {
     this.getTrends();
     this.getPostss();
     this.getSingle();
+    this.getPostsOwn();
     console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token' + localStorage.getItem('token'));
   }
 
@@ -196,6 +197,7 @@ export class StartpaginaComponent implements OnInit {
           this.getStatistics();
         },
         error => this.errorMessage = <any>error);
+    this.getPostsOwn();
   }
 
   addLike(idde: any): void {

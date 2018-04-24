@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
     this.apiSerivce.getProfile(this.naampje)
       .subscribe(
         resultArray => this.profilearray = resultArray,
-        error => console.log("Error :: " + error)
+        error => console.log("Error : " + error)
       );
   }
 
@@ -104,15 +104,6 @@ export class ProfileComponent implements OnInit {
         error => console.log("Error :: " + error)
       );
     this.getStatistics();
-  }
-
-  editProfilePicture(string: any): void  {
-    this.apiSerivce.editProfilePictureWithObservable(this.idtje, string)
-      .subscribe( profilee => {
-          profilee.picture = string;
-          this.picture = profilee.picture;
-        },
-        error => this.errorMessage = <any>error);
   }
 
   editProfileName(string: any): void  {

@@ -124,6 +124,16 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  getPostsOwn(id: any): Observable<Tweet[]> {
+    console.log(this.http.get('http://localhost:8080/Kwetter/resources/users/OwnAndOthers?id=' + id));
+    return this.http
+      .get(this._postsURL)
+      .map((response: Response) => {
+        return <Tweet[]>response.json();
+      })
+      .catch(this.handleError);
+  }
+
   getProfile(string: any): Observable<Profile> {
     return this.http
       .get(this.getProfileByName + string)

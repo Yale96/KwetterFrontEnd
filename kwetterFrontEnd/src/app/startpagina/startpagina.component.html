@@ -57,8 +57,8 @@
       </button>
     </div>
     <div class="btn-group" role="group">
-      <button type="button" id="statistics" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
-        <div class="hidden-xs">Statistieken</div>
+      <button type="button" id="statistics" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+        <div class="hidden-xs">Own and Others</div>
       </button>
     </div>
     <div class="btn-group" role="group">
@@ -147,18 +147,11 @@
             </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
-            <tr *ngFor="let post of _postsArray">
+            <tr *ngFor="let post of ownAndOthersArray">
               <td class="text-center" style="width: 15px;">{{post.id}}</td>
               <td class="text-center" style="width: 200px;">{{post.content}}</td>
               <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
               <td class="text-center"  style="width: 200px;">{{post.owner}}</td>
-=======
-            <tr>
-              <td class="text-center" style="width: 15px;">6</td>
-              <td class="text-center" style="width: 15px;">1</td>
-              <td class="text-center" style="width: 15px;">1</td>
->>>>>>> 07a50749b5c74960f12f71ba7b368c053e4c0d85
             </tr>
             </tbody>
           </table>
