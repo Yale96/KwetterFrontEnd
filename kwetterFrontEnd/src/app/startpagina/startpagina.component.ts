@@ -35,7 +35,7 @@ export class StartpaginaComponent implements OnInit {
   checkBoolFollow: boolean;
   profilearray: Profile;
 
-
+  ownAndOthersArray: Tweet[] = [];
 
   t = new Tweet();
   tweetjes: Observable<Tweet>;
@@ -62,6 +62,17 @@ export class StartpaginaComponent implements OnInit {
           console.log("POST ARRAY:::::::::::::::: " + this._postsArray);
         },
           error => console.log("Error :: " + error)
+      );
+  }
+
+  getPostsOwn(): void {
+    this.apiSerivce.getPosts()
+      .subscribe(
+        (tweets) => {
+          this.ownAndOthersArray = tweets;
+          console.log("POST ARRAY:::::::::::::::: " + this.ownAndOthersArray);
+        },
+        error => console.log("Error :: " + error)
       );
   }
 

@@ -147,21 +147,23 @@
       </div>
 
       <div class="tab-pane fade in" id="tab4">
-        <h3>Overzicht van jouw statistieken</h3>
+        <h3>Tweets van jou en je volgers</h3>
         <div class="row">
           <table class="table">
             <thead class="thead-inverse">
             <tr>
-              <th class="text-center">Aantal tweets</th>
-              <th class="text-center">Aantal volgers</th>
-              <th class="text-center">Aantal volgende</th>
+              <th class="text-center">Id</th>
+              <th class="text-center">Content</th>
+              <th class="text-center">Tijdstip</th>
+              <th class="text-center">Owner</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td class="text-center" style="width: 15px;">{{_statisticssArray.tweetsCount}}</td>
-              <td class="text-center" style="width: 15px;">{{_statisticssArray.followersCount}}</td>
-              <td class="text-center" style="width: 15px;">{{_statisticssArray.supersCount}}</td>
+            <tr *ngFor="let post of _postsArray">
+              <td class="text-center" style="width: 15px;">{{post.id}}</td>
+              <td class="text-center" style="width: 200px;">{{post.content}}</td>
+              <td class="text-center" style="width: 200px;">{{post.timeStamp}}</td>
+              <td class="text-center"  style="width: 200px;">{{post.owner}}</td>
             </tr>
             </tbody>
           </table>
