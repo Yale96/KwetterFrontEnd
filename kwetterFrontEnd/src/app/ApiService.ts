@@ -149,12 +149,8 @@ export class ApiService {
   }
 
   getStatistics(string: any): Observable<User> {
-    return this.http
-      .get(this.getUser + string)
-      .map((response: Response) => {
-        return <User>response.json();
-      })
-      .catch(this.handleError);
+    const options = {headers: new HttpHeaders({'Content-Type' : 'application/json'})};
+    return this.https.get<User>(this.getUser + string, options);
   }
 
   private handleError(error: Response) {

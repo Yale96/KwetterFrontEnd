@@ -25,7 +25,7 @@ export class StartpaginaComponent implements OnInit {
   tagsArray: HashTag[];
   stringsArray: string[];
   idArray: number[] = [];
-  _statisticssArray: User;
+  usert: User;
   errorMessage: string;
   content: string;
   naampje = localStorage.getItem('currentUser');
@@ -101,6 +101,7 @@ export class StartpaginaComponent implements OnInit {
         resultArray => this.stringsArray = resultArray,
         error => console.log("Error :: " + error)
       );
+    this.getStatistics();
   }
 
   getSingle(): Tweet {
@@ -149,11 +150,11 @@ export class StartpaginaComponent implements OnInit {
   }
 
   getStatistics(): void {
-    this.apiSerivce.getStatistics(this.naampje)
-      .subscribe(
-        resultArray => this._statisticssArray = resultArray,
-        error => console.log("Error :: " + error)
-      );
+    this.apiSerivce.getStatistics(this.naampje).subscribe(data => {
+      console.log('DATA::::::::::: ' + data);
+      this.usert = data;
+      console.log('DATA::::::::::: ' + this.usert.username + ', ' + this.usert.tweetsCount);
+    });
   }
 
   ngOnInit(): void {
@@ -218,7 +219,7 @@ export class StartpaginaComponent implements OnInit {
           this.getStatistics();
           this.getTrends();
           this.checkFollow(this.tweettt.owner);
-          console.log('TWEETTT::::' + tweett)
+          console.log('TWEETTT::::' + this.tweettt);
         },
         error => this.errorMessage = <any>error);
         console.log('T ID::::::::: ' + this.tweettt.id);
@@ -226,10 +227,6 @@ export class StartpaginaComponent implements OnInit {
         this.checkLike(this.tweettt.id);
         this.checkFlag(this.tweettt.id);
         this.checkFollow(this.tweettt.owner);
-        this.getStatistics();
         console.log('BOOL FOLLOW::::::::: ' + this.checkBoolFollow);
-
-    // this.checkFlag(naampje, 1);
-    // this.checkLike(naampje, 1);
   }
 }
