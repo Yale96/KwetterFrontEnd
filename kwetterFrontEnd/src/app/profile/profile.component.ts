@@ -124,6 +124,15 @@ export class ProfileComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  editProfilePicture(string: any): void  {
+    this.apiSerivce.editProfilePictureWithObservable(this.idtje, string)
+      .subscribe( profilee => {
+          profilee.web = string;
+          this.web = profilee.web;
+        },
+        error => this.errorMessage = <any>error);
+  }
+
   editProfileLocatie(string: any): void  {
     this.apiSerivce.editProfileLocatieWithObservable(this.idtje, string)
       .subscribe( profilee => {
