@@ -133,6 +133,16 @@ export class ProfileComponent implements OnInit {
         error => this.errorMessage = <any>error);
   }
 
+  unFollowUser(string: any): void {
+    this.apiSerivce.unfollowUserWithObservable(this.idtje, string)
+      .subscribe( user => {
+          this.getFollowingUsers();
+          this.getStatistics();
+        },
+        error => this.errorMessage = <any>error);
+    this.getFollowingUsers();
+  }
+
   editProfileLocatie(string: any): void  {
     this.apiSerivce.editProfileLocatieWithObservable(this.idtje, string)
       .subscribe( profilee => {

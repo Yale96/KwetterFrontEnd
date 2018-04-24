@@ -191,6 +191,14 @@ export class ApiService {
       .catch(this.handleErrorObservable);
   }
 
+  unfollowUserWithObservable(id: any, string: any): Observable<Tweet> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post('http://localhost:8080/Kwetter/resources/users/removeFollower?id=' + id + '&superName=' + string, options)
+      .map(this.extractData)
+      .catch(this.handleErrorObservable);
+  }
+
   addFlagWithObservable(string: any, id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });

@@ -157,11 +157,13 @@
             <thead class="thead-inverse">
             <tr>
               <th class="text-center">Naam</th>
+              <th class="text-center">Unfollow</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let post of stringsArray;">
               <td class="text-center" style="width: 15px;">{{post}}</td>
+              <td style="width: 15px; align-content: center"><button type="button" class="btn btn-default center-block text-center glyphicon glyphicon-minus" (click)="unFollowUser(post);"></button></td>
             </tr>
             </tbody>
           </table>
