@@ -210,9 +210,11 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label">Biography:</label>
                   <div class="col-md-5">
-                    <textarea class="form-control" style="width: 340px;" placeholder="Vertel iets over jezelf..." aria-label="" aria-describedby="basic-addon1" ng-model="test" ng-trim="false" maxlength="160" #bioa></textarea>
+                    <textarea [(ngModel)]="profile.bio" class="form-control" style="width: 340px;" placeholder="Vertel iets over jezelf..." aria-label="" aria-describedby="basic-addon1" maxlength="160" data-ng-trim="false" #bioa></textarea>
                     <br />
-                    <span>{{160 - profilearray.bio.length}} left</span>
+                  </div>
+                  <div class="form-row__description">
+                    You have written {{ bioa.value.length }} / 140 characters
                   </div>
                 </div>
                 <div class="form-group">

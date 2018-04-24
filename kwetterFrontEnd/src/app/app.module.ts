@@ -14,6 +14,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {TokenInterceptor} from './TokenInterceptor';
 import {AuthenticationService} from './AuthenticationService';
 import {ApiService} from './ApiService';
+import {CountdownPipe} from './CountdownPipe';
+import {MainPipe} from './MainPipe';
+import {InputCounterModule} from 'ng4-input-counter';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import {ApiService} from './ApiService';
     FormsModule,
     HttpClientModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    InputCounterModule.forRoot()
   ],
   declarations: [
     AppComponent,

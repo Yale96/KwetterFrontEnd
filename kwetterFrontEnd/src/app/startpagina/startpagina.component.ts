@@ -9,12 +9,13 @@ import {AuthenticationService} from '../AuthenticationService';
 import {Profile} from '../Profile';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {CountdownPipe} from '../CountdownPipe';
 
 @Component({
   selector: 'app-startpagina',
   templateUrl: './startpagina.component.html',
   styleUrls: ['./startpagina.component.css'],
-  providers: [ApiService, AuthenticationService]
+  providers: [ApiService, AuthenticationService, CountdownPipe]
 })
 export class StartpaginaComponent implements OnInit {
 

@@ -74,13 +74,16 @@
         <h3>Tweet posten</h3>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <button type="button" class="btn btn-default" (click)="addTweet(tweetttt.value);">Post tweet</button>
+              <button type="button" class="btn btn-default" (click)="addTweet(tweetttt.value); tweet.content = ''">Post tweet</button>
             </div>
-          <textarea class="form-control" style="width: 500px;" placeholder="Wat ben je aan het doen?" aria-label="" aria-describedby="basic-addon1" maxlength="140" #tweetttt></textarea>
-          <span>{{140 - tweet.content.length}} left</span>
-        </div>
+          <textarea [(ngModel)]="tweet.content" style="width: 500px;" data-ng-trim="false" placeholder="Wat ben je aan het doen?" maxlength="140" #tweetttt></textarea>
+          <div class="form-row__description">
+            You have written {{ tweetttt.value.length }} /140 characters
+          </div>
 
+        </div>
       </div>
+
       <div class="tab-pane fade in" id="tab2">
         <h3>Timeline</h3>
         <div class="row">
