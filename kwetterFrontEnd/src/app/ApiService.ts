@@ -210,7 +210,7 @@ export class ApiService {
   addTweetWithObservable(string: any, test: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:8080/Kwetter/resources/tweets/post?name=" + test + "&content=" + string, options)
+    return this.https.post("http://localhost:8080/Kwetter/resources/tweets/post?name=" + test + "&content=" + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
