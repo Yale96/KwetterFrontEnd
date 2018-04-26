@@ -230,6 +230,7 @@ export class StartpaginaComponent implements OnInit {
         this.checkLike(this.tweettt.id);
         this.checkFlag(this.tweettt.id);
         this.checkFollow(this.tweettt.owner);
+        this.getPosts();
         console.log('BOOL FOLLOW::::::::: ' + this.checkBoolFollow);
   }
 }

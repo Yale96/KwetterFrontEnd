@@ -170,7 +170,7 @@ export class ApiService {
   removeTweetWithObservable(id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.removeTweet + id, options)
+    return this.https.post(this.removeTweet + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -178,7 +178,7 @@ export class ApiService {
   addLikeWithObservable(string: any, id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:8080/Kwetter/resources/tweets/like?name=" + string + "&tweetId=" + id, options)
+    return this.https.post("http://localhost:8080/Kwetter/resources/tweets/like?name=" + string + "&tweetId=" + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -186,7 +186,7 @@ export class ApiService {
   followUserWithObservable(id: any, string: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post('http://localhost:8080/Kwetter/resources/users/addFollower?id=' + id + '&superName=' + string, options)
+    return this.https.post('http://localhost:8080/Kwetter/resources/users/addFollower?id=' + id + '&superName=' + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -194,7 +194,7 @@ export class ApiService {
   unfollowUserWithObservable(id: any, string: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post('http://localhost:8080/Kwetter/resources/users/removeFollower?id=' + id + '&superName=' + string, options)
+    return this.https.post('http://localhost:8080/Kwetter/resources/users/removeFollower?id=' + id + '&superName=' + string, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -202,7 +202,7 @@ export class ApiService {
   addFlagWithObservable(string: any, id: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:8080/Kwetter/resources/tweets/flag?name=" + string + "&tweetId=" + id, options)
+    return this.https.post("http://localhost:8080/Kwetter/resources/tweets/flag?name=" + string + "&tweetId=" + id, options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }
@@ -236,7 +236,7 @@ export class ApiService {
   addUserWithObservable(name: any, password: any): Observable<Tweet> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:8080/Kwetter/resources/users/register?username=" + name + "&password=" + password + "", options)
+    return this.https.post("http://localhost:8080/Kwetter/resources/users/register?username=" + name + "&password=" + password + "", options)
       .map(this.extractData)
       .catch(this.handleErrorObservable);
   }

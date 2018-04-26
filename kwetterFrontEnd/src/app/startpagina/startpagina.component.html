@@ -74,7 +74,7 @@
         <h3>Tweet posten</h3>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <button type="button" class="btn btn-default" (click)="addTweet(tweetttt.value); tweet.content = ''">Post tweet</button>
+              <button type="button" class="btn btn-default" (click)="addTweet(tweetttt.value);">Post tweet</button>
             </div>
           <textarea [(ngModel)]="tweet.content" style="width: 500px;" data-ng-trim="false" placeholder="Wat ben je aan het doen?" maxlength="140" #tweetttt></textarea>
           <div class="form-row__description">
