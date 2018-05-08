@@ -86,6 +86,7 @@ export class ProfileComponent implements OnInit {
           this.getTweetsByUserId();
         },
         error => this.errorMessage = <any>error);
+    this.getTweetsByUserId();
   }
 
   getFollowingUsers(): void {

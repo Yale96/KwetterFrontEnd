@@ -218,6 +218,7 @@ export class StartpaginaComponent implements OnInit {
     this.apiSerivce.addTweetWithObservable(string, this.naampje)
       .subscribe( tweett => {
           this.tweettt = this.getSingle();
+          this.getPostss();
           this.getPosts();
           this.getStatistics();
           this.getTrends();
@@ -225,12 +226,10 @@ export class StartpaginaComponent implements OnInit {
           console.log('TWEETTT::::' + this.tweettt);
         },
         error => this.errorMessage = <any>error);
-        console.log('T ID::::::::: ' + this.tweettt.id);
-        console.log('T OWNER::::::::: ' + this.tweettt.owner);
         this.checkLike(this.tweettt.id);
         this.checkFlag(this.tweettt.id);
         this.checkFollow(this.tweettt.owner);
         this.getPosts();
-        console.log('BOOL FOLLOW::::::::: ' + this.checkBoolFollow);
+        this.getPostss();
   }
 }
