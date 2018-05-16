@@ -31,6 +31,7 @@
     "jquery": "^3.3.1",
     "jwt-decode": "^2.2.0",
     "jwthelper": "0.0.4",
+    "ng-event-source": "^1.0.10",
     "ng4-input-counter": "^0.1.4",
     "ngx-moment": "^2.0.0-rc.0",
     "rxjs": "^5.5.6",

@@ -29,6 +29,7 @@ export class AuthenticationComponent implements OnInit {
     // reset login status
     this.authenticationService.logout();
     console.log('Stored User Id ' + localStorage.getItem('userId') + ' Stored User name ' + localStorage.getItem('currentUser') + ' Stored token ' + localStorage.getItem('token'));
+    this.apiSerive.subscribee();
   }
 
   login(username: string, password: string) {

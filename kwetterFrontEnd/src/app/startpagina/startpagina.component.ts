@@ -10,6 +10,10 @@ import {Profile} from '../Profile';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {CountdownPipe} from '../CountdownPipe';
+import {EventSourcePolyfill} from 'ng-event-source';
+import {NgZone} from '@angular/core';
+
+declare var EventSource;
 
 @Component({
   selector: 'app-startpagina',
@@ -18,7 +22,7 @@ import {CountdownPipe} from '../CountdownPipe';
   providers: [ApiService, AuthenticationService, CountdownPipe]
 })
 export class StartpaginaComponent implements OnInit {
-
+  public zone: NgZone;
   _postsArray: Tweet[] = [];
   tweetarray: Tweet[] = [];
   _mentionsArray: Tweet[];
@@ -48,12 +52,28 @@ export class StartpaginaComponent implements OnInit {
   id: number;
 
   constructor(private apiSerivce: ApiService, private authenticationService: AuthenticationService) {
+
     this.naampje = this.naampje.replace(/"/g, "");
+
+    let eventSource = new EventSource('http://localhost:8080/Kwetter/resources/tweets/register');
+    eventSource.onmessage = (data => {
+      this.getPosts();
+      console.log('listen');
+    });
+    eventSource.onopen = (a) => {
+      // Do stuff here
+    };
+    eventSource.onerror = (e) => {
+      // Do stuff here
+    }
   }
 
   logout() {
     this.authenticationService.logout();
   }
+
+
+
 
   getPosts(): void {
     this.apiSerivce.getPosts()
@@ -226,7 +246,7 @@ export class StartpaginaComponent implements OnInit {
           console.log('TWEETTT::::' + this.tweettt);
         },
         error => this.errorMessage = <any>error);
-        this.checkLike(this.tweettt.id);
+         this.checkLike(this.tweettt.id);
         this.checkFlag(this.tweettt.id);
         this.checkFollow(this.tweettt.owner);
         this.getPosts();

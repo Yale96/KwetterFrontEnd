@@ -40,6 +40,7 @@ export class ApiService {
   private getTags = "http://localhost:8080/Kwetter/resources/hashtags";
   private byname = "http://localhost:8080/Kwetter/resources/users/byname?name=";
   private trends = "http://localhost:8080/Kwetter/resources/hashtags/trends";
+  private subscribe = "http://localhost:8080/Kwetter/resources/tweets/register";
 
   private content: string;
 
@@ -55,6 +56,12 @@ export class ApiService {
       .map((response: Response) => {
         return <Tweet>response.json();
       })
+      .catch(this.handleError);
+  }
+
+  subscribee(): Observable<void> {
+    return this.http
+      .get(this.subscribe)
       .catch(this.handleError);
   }
 
