@@ -58,7 +58,7 @@ export class StartpaginaComponent implements OnInit {
     let eventSource = new EventSource('http://localhost:8080/Kwetter/resources/tweets/register');
     eventSource.onmessage = (data => {
       this.getPosts();
-      console.log('TWEET ONTVANGEN!!!!!');
+      console.log('TWEET ONTVANGEN!!!!! ' + data);
     });
     eventSource.onopen = (a) => {
       // Do stuff here
