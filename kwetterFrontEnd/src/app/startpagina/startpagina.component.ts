@@ -58,8 +58,7 @@ export class StartpaginaComponent implements OnInit {
     let eventSource = new EventSource('http://localhost:8080/Kwetter/resources/tweets/register');
     eventSource.onmessage = (data => {
       this.getPosts();
-      this.getPostss();
-      console.log('listen');
+      console.log('TWEET ONTVANGEN!!!!!');
     });
     eventSource.onopen = (a) => {
       // Do stuff here
@@ -239,18 +238,18 @@ export class StartpaginaComponent implements OnInit {
     this.apiSerivce.addTweetWithObservable(string, this.naampje)
       .subscribe( tweett => {
           this.tweettt = this.getSingle();
-          this.getPostss();
+          // this.getPostss();
           this.getPosts();
           this.getStatistics();
-          this.getTrends();
-          this.checkFollow(this.tweettt.owner);
+          // this.getTrends();
+          // this.checkFollow(this.tweettt.owner);
           console.log('TWEETTT::::' + this.tweettt);
         },
         error => this.errorMessage = <any>error);
-         this.checkLike(this.tweettt.id);
-        this.checkFlag(this.tweettt.id);
-        this.checkFollow(this.tweettt.owner);
-        this.getPosts();
-        this.getPostss();
+    //this.checkLike(this.tweettt.id);
+    // this.checkFlag(this.tweettt.id);
+    //this.checkFollow(this.tweettt.owner);
+    this.getPosts();
+    // this.getPostss();
   }
 }
